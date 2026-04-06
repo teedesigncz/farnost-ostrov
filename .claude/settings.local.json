@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc \"G:/Můj disk/00_Tee Design/00_TEE Design CZ - projekty/farnost_ostrov/obsah/4. neděle postní 26A.docx\" -t markdown)",
+      "Bash(python \"C:/Users/mpole/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/e951b553-578e-4add-b2e9-9da212b00d03/7ef09956-6571-40f0-9e91-6e826c6f3890/skills/docx/scripts/office/unpack.py\" \"G:/Můj disk/00_Tee Design/00_TEE Design CZ - projekty/farnost_ostrov/obsah/4. neděle postní 26A.docx\" \"G:/Můj disk/00_Tee Design/00_TEE Design CZ - projekty/farnost_ostrov/obsah/unpacked/\")",
+      "Bash(python -c \":*)",
+      "Read(//c/Users/mpole/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/e951b553-578e-4add-b2e9-9da212b00d03/7ef09956-6571-40f0-9e91-6e826c6f3890/skills/xlsx/**)",
+      "Bash(pip install:*)",
+      "Bash(awk NR>=772 && NR<=784:*)",
+      "Bash(awk NR>=799 && NR<=808:*)",
+      "Bash(awk NR>=1069 && NR<=1074:*)",
+      "Bash(awk NR>=974 && NR<=1075:*)",
+      "Bash(awk NR>=1065 && NR<=1075:*)",
+      "Bash(awk NR>=972 && NR<=982:*)",
+      "Bash(awk NR>=1058 && NR<=1066:*)",
+      "Bash(python3:*)",
+      "Bash(powershell:*)",
+      "Bash(cmd:*)",
+      "Bash(find 'G:/Můj disk/00_Tee Design/00_TEE Design CZ - projekty/farnost_ostrov_II' -type f -name *.html -o -name *.css -o -name *.js)",
+      "Bash(cd:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:www.farnostostrov.cz)",
+      "Bash(for f in \"aktualita-serova-vecere.html\" \"aktualita-krizova-cesta-farnosti.html\" \"aktualita-velikonoce-2026.html\" \"ostrov-kostel-sv-michaela.html\" \"bozi-dar-kostel-sv-anny.html\" \"jachymov-kostel-sv-jachyma.html\" \"horni-blatna-kostel-sv-vavrince.html\" \"abertamy-kostel-ctrnacti-sv-pomocniku.html\" \"pernink-kostel-nejsvetejsi.trojice.html\" \"velichov-kostel-nanebevzeti-panny-marie.html\" \"foto-galerie.html\")",
+      "Bash(do)",
+      "Bash(echo \"=== $f ===\")",
+      "Read(//g/Můj disk/00_Tee Design/00_TEE Design CZ - projekty/farnost_ostrov_II/**)",
+      "Bash(done)",
+      "Bash(magick:*)",
+      "Bash(sed -n '130,136p' aktualita-krizova-cesta-farnosti.html)",
+      "Bash(sed -n '48,53p' aktualita-serova-vecere.html)",
+      "Bash(sed -n '48,53p' aktualita-velikonoce-2026.html)",
+      "Bash(sed -n '48,53p' nasi-knezi.html)",
+      "Bash(sed -n '48,53p' o-farnosti.html)",
+      "Bash(python -c \"print\\('ok'\\)\")",
+      "Bash(where python:*)",
+      "Bash(where node:*)",
+      "Bash(where pwsh:*)",
+      "Bash(C:/Users/polednicek.m/AppData/Local/Python/bin/python.exe:*)"
+    ]
+  }
+}

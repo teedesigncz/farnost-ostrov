@@ -1,0 +1,1155 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Římskokatolická farnost Ostrov | oficiální web</title>
+<meta name="description" content="Aktuální informace, pořad bohoslužeb a činnost farnosti. Aktivní centrum víry, tradice a křesťanského života v regionu.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.farnostostrov.cz/">
+<meta property="og:site_name" content="Farnost Ostrov">
+<meta property="og:title" content="Římskokatolická farnost Ostrov | oficiální web">
+<meta property="og:description" content="Aktuální informace, pořad bohoslužeb a činnost farnosti. Aktivní centrum víry, tradice a křesťanského života v regionu.">
+<meta property="og:image" content="https://www.farnostostrov.cz/img/hero-banner.jpg">
+<meta name="keywords" content="farnost Ostrov, bohoslužby Ostrov, mše v Ostrově">
+<meta name="author" content="Marek Poledníček, vibe4you">
+<meta name="robots" content="index, follow">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YC8PFWZWHN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YC8PFWZWHN');
+</script>
+<link rel="icon" type="image/png" href="img/darnost-favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 68vh;
+    min-height: 480px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform-origin: center center;
+    animation: slowzoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes slowzoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,6,2,0.15) 0%,
+      rgba(10,6,2,0.1) 40%,
+      rgba(10,6,2,0.7) 75%,
+      rgba(10,6,2,1) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+    animation: fadeup 1.4s ease both;
+  }
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    animation: fadeup 1.4s 0.2s ease both;
+  }
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.05;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+    animation: fadeup 1.4s 0.4s ease both;
+  }
+  .hero-title em {
+    display: block;
+    font-style: normal;
+    color: var(--gold-light);
+  }
+  .hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--gold-pale);
+    margin-top: 1.2rem;
+    opacity: 0.85;
+    animation: fadeup 1.4s 0.6s ease both;
+  }
+  .hero-divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 1.8rem auto;
+    animation: fadeup 1.4s 0.7s ease both;
+  }
+  .hero-cta {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dark);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    padding: 0.85rem 2.5rem;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeup 1.4s 0.9s ease both;
+  }
+  .hero-welcome {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: rgba(249,243,227,0.85);
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    animation: fadeup 1.4s 1s ease both;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,146,42,0.4);
+  }
+
+  /* ── SEKCÍ ── */
+  section { position: relative; }
+
+  /* Liturgický kalendář / Bohoslužby */
+  .messe {
+    background: var(--dark);
+    padding: 3.5rem 2rem;
+  }
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; margin: 1.5rem auto 3rem;
+  }
+  .ornament-line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+  .ornament-line.rev { background: linear-gradient(to left, transparent, var(--gold)); }
+  .ornament-cross { color: var(--gold); font-size: 1.2rem; }
+
+  .messe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5px;
+    border: 1px solid rgba(201,146,42,0.2);
+  }
+  .messe-card {
+    background: var(--dark-mid);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border: 1px solid rgba(201,146,42,0.12);
+    transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .messe-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .messe-card:hover { background: rgba(201,146,42,0.06); }
+  .messe-card:hover::before { opacity: 1; }
+  .messe-day {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .messe-time {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.9rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .messe-note {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(245,228,176,0.6);
+  }
+
+  /* Aktuality */
+  .news {
+    background: linear-gradient(180deg, var(--dark) 0%, #110d04 100%);
+    padding: 3.5rem 2rem;
+  }
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .news-item {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.8rem;
+    transition: border-color 0.3s;
+  }
+  .news-item:hover { border-color: var(--gold-light); }
+  .news-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  .news-headline {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    line-height: 1.4;
+    margin-bottom: 0.7rem;
+  }
+  .news-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(249,243,227,0.65);
+  }
+  .news-link {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .news-link:hover { border-color: var(--gold-light); }
+
+  /* Uvítací sekce */
+  .welcome {
+    background: var(--dark);
+    padding: 2.5rem 2rem 2rem;
+    border-bottom: 1px solid rgba(201,146,42,0.12);
+  }
+  .welcome-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .welcome-text {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-style: italic;
+    line-height: 1.85;
+    color: rgba(249,243,227,0.8);
+    margin-bottom: 0;
+  }
+  .email-form {
+    display: flex;
+    gap: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    border: 1px solid rgba(201,146,42,0.35);
+  }
+  .email-form input[type="email"] {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: none;
+    outline: none;
+    padding: 0.9rem 1.2rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    min-width: 0;
+  }
+  .email-form input[type="email"]::placeholder { color: rgba(245,228,176,0.35); }
+  .email-form button {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border: none;
+    padding: 0.9rem 1.6rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+  }
+  .email-form button:hover { opacity: 0.85; }
+  .email-success {
+    display: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    margin-top: 1rem;
+  }
+
+  /* Kontakt & farář */
+  .contact {
+    background: var(--dark-mid);
+    padding: 3.5rem 2rem;
+    border-top: 1px solid rgba(201,146,42,0.15);
+  }
+  .contact-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    /* Hero 4:5 */
+    .hero { height: 125vw; min-height: unset; }
+  }
+
+  @media (max-width: 700px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      background: rgba(10,6,2,0.97);
+      padding: 1rem 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { text-align: center; }
+    .nav-links a { display: block; padding: 0.85rem 1rem; font-size: 0.8rem; opacity: 1; }
+  }
+  .contact-block h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+  }
+  .contact-row {
+    display: flex; gap: 1rem; align-items: baseline;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(249,243,227,0.75);
+  }
+  .contact-row strong {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+  .pastor-card {
+    display: flex; gap: 2rem; align-items: center;
+    background: rgba(201,146,42,0.06);
+    border: 1px solid rgba(201,146,42,0.2);
+    padding: 2rem;
+  }
+  .pastor-icon {
+    width: 60px; height: 60px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .pastor-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .pastor-title {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(245,228,176,0.6);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(201,146,42,0.2);
+    padding: 5rem 3rem 2rem;
+  }
+  .footer-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(201,146,42,0.12);
+  }
+  @media (max-width: 800px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 3rem 1.5rem 2rem; }
+  }
+  .footer-col-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+  .footer-address {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: rgba(249,243,227,0.65);
+  }
+  .footer-address a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+  .footer-address a:hover { border-color: var(--gold-light); }
+  .footer-person { margin-bottom: 1.5rem; }
+  .footer-person-name { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--cream); margin-bottom: 0.3rem; }
+  .footer-person-detail { font-size: 0.95rem; line-height: 1.8; color: rgba(249,243,227,0.55); }
+  .footer-person-detail a { color: rgba(249,243,227,0.55); text-decoration: none; transition: color 0.3s; }
+  .footer-person-detail a:hover { color: var(--gold-light); }
+  .footer-form { display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-form input, .footer-form textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,146,42,0.25);
+    outline: none; padding: 0.7rem 1rem;
+    font-family: 'EB Garamond', serif; font-size: 0.95rem;
+    color: var(--cream); width: 100%; transition: border-color 0.3s;
+  }
+  .footer-form input::placeholder, .footer-form textarea::placeholder { color: rgba(245,228,176,0.3); }
+  .footer-form input:focus, .footer-form textarea:focus { border-color: rgba(201,146,42,0.6); }
+  .footer-form textarea { resize: vertical; min-height: 90px; }
+  .footer-form button {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    border: none; padding: 0.75rem 1.4rem;
+    font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--dark); cursor: pointer;
+    align-self: flex-start; transition: opacity 0.3s;
+  }
+  .footer-form button:hover { opacity: 0.85; }
+  .footer-form-success { display: none; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold-light); margin-top: 0.3rem; }
+  .footer-bottom {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; padding-top: 1.8rem;
+  }
+  .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 0.85rem; color: var(--gold); }
+  .footer-copy { font-size: 0.85rem; color: rgba(249,243,227,0.25); font-style: italic; }
+
+  /* Velikonoce */
+  .vel-den { border-top: 1px solid rgba(201,146,42,0.15); padding: 1.4rem 0 0.4rem; }
+  .vel-den:first-child { border-top: none; }
+  .vel-den-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .vel-datum { font-family: var(--font-serif); color: var(--gold); font-size: 1.05rem; font-weight: 600; min-width: 7rem; }
+  .vel-nazev { color: rgba(240,230,210,0.7); font-size: 0.78rem; font-family: var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; }
+  .vel-row { display: flex; align-items: baseline; gap: 0; padding: 0.3rem 0; }
+  .vel-cas { min-width: 4rem; color: var(--gold); font-family: var(--font-sans); font-size: 0.88rem; opacity: 0.85; }
+  .vel-misto { min-width: 13rem; color: var(--cream); font-family: var(--font-sans); font-size: 0.88rem; font-weight: 500; }
+  .vel-bohosluzba { color: rgba(240,230,210,0.75); font-family: var(--font-sans); font-size: 0.85rem; }
+  .vel-pozn { color: rgba(201,146,42,0.65); font-size: 0.8rem; }
+  .vel-highlighted .vel-den-header { margin-bottom: 0.8rem; }
+  @media (max-width: 600px) {
+    .vel-row { flex-wrap: wrap; gap: 0.2rem; }
+    .vel-misto { min-width: 100%; }
+  }
+
+  /* Ohlášky */
+  .ohlasy {
+    background: var(--dark);
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(201,146,42,0.12);
+  }
+  .ohlasy-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ohlasy-content {
+    margin-top: 3rem;
+    text-align: left;
+  }
+  .ohlasy-tyden {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+  }
+  .ohlaska-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .ohlaska-item {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid rgba(201,146,42,0.15);
+    background: var(--dark-mid);
+    align-items: start;
+  }
+  .ohlaska-item:hover {
+    border-color: rgba(201,146,42,0.35);
+    background: rgba(201,146,42,0.04);
+  }
+  .ohlaska-datum {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    line-height: 1.6;
+    padding-top: 0.15rem;
+    border-right: 1px solid rgba(201,146,42,0.2);
+    padding-right: 1.5rem;
+  }
+  .ohlaska-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--cream);
+  }
+  .ohlaska-text strong {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .ohlaska-featured {
+    grid-template-columns: 10rem 1fr auto;
+    align-items: center;
+  }
+  .ohlaska-featured-img {
+    width: 130px;
+    border: 1px solid rgba(201,146,42,0.25);
+    display: block;
+    cursor: zoom-in;
+    transition: border-color 0.3s, opacity 0.3s;
+  }
+  .ohlaska-featured-img:hover { border-color: var(--gold); opacity: 0.85; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(10,6,2,0.92);
+    align-items: center; justify-content: center;
+    cursor: zoom-out;
+    backdrop-filter: blur(4px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border: 1px solid rgba(201,146,42,0.4);
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+  }
+  @media (max-width: 700px) {
+    .ohlaska-item { grid-template-columns: 1fr; }
+    .ohlaska-datum { border-right: none; border-bottom: 1px solid rgba(201,146,42,0.2); padding-right: 0; padding-bottom: 0.6rem; }
+    .ohlaska-featured { grid-template-columns: 1fr; }
+    .ohlaska-featured-img { width: 100px; margin-top: 0.5rem; }
+  }
+
+  /* Pořad bohoslužeb */
+  .bohosluzby {
+    background: var(--dark);
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(201,146,42,0.12);
+  }
+  .bohosluzby-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 900px) { .bohosluzby-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .bohosluzby-grid { grid-template-columns: 1fr; } }
+  .boz-box {
+    border: 1px solid rgba(201,146,42,0.2);
+    background: var(--dark-mid);
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .boz-box:hover {
+    border-color: rgba(201,146,42,0.5);
+    background: rgba(201,146,42,0.05);
+  }
+  .boz-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .boz-box:hover::before { opacity: 1; }
+  .boz-mesto {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,146,42,0.15);
+  }
+  .boz-mesto-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,146,42,0.35);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .boz-mesto-link:hover {
+    color: #fff;
+    border-bottom-color: var(--gold-light);
+  }
+  .boz-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .boz-den {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,228,176,0.5);
+  }
+  .boz-cas {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--cream);
+  }
+
+  /* Kaple sv. Rodiny – zvláštní zobrazení */
+  .kaple-banner {
+    max-width: 1100px;
+    margin: 1.5rem auto 0;
+    padding: 1.2rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .kaple-banner-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+  .kaple-banner-body { flex: 1; }
+  .kaple-banner-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .kaple-banner-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(245,228,176,0.5);
+  }
+  .kaple-banner-time {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--cream);
+    white-space: nowrap;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .kaple-banner-time small {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,228,176,0.5);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  @media (max-width: 600px) {
+    .kaple-banner { flex-wrap: wrap; gap: 1rem; }
+    .kaple-banner-time { text-align: left; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RYCHLÉ LINKY ── */
+  .rychle-linky {
+    background: var(--dark);
+    padding: 3rem 2rem;
+    border-bottom: 1px solid rgba(201,146,42,0.12);
+  }
+  .rychle-linky-grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .rychle-linky-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--cream);
+    transition: transform 0.3s;
+  }
+  .rychle-linky-item:hover { transform: translateY(-4px); }
+  .rychle-linky-kruh {
+    width: 80px; height: 80px;
+    border: 2px solid rgba(201,146,42,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    background: rgba(201,146,42,0.06);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .rychle-linky-item:hover .rychle-linky-kruh {
+    border-color: var(--gold);
+    background: rgba(201,146,42,0.12);
+  }
+  .rychle-linky-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+  }
+  @media (max-width: 600px) {
+    .rychle-linky-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .rychle-linky-kruh { width: 60px; height: 60px; font-size: 1.5rem; }
+    .rychle-linky-label { font-size: 0.62rem; }
+  }
+
+  /* ── AKTUALITY KARTY ── */
+  .aktuality-karta-odkaz {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .aktuality-karta--brzy { opacity: 0.55; }
+  .aktuality-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .aktuality-karta {
+    background: var(--dark-mid);
+    border: 1px solid rgba(201,146,42,0.15);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    height: 100%;
+  }
+  .aktuality-karta:hover {
+    border-color: rgba(201,146,42,0.4);
+    transform: translateY(-3px);
+  }
+  .aktuality-karta-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+  }
+  .aktuality-karta-img-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(201,146,42,0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    border-bottom: 1px solid rgba(201,146,42,0.1);
+  }
+  .aktuality-karta-body {
+    padding: 1.4rem 1.5rem;
+  }
+  .aktuality-karta-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--cream);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+  .aktuality-karta-perex {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(249,243,227,0.6);
+  }
+  .aktuality-karta-meta {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:0.7rem;"><img src="img/erb-farnosti.png" alt="Erb farnosti" style="height:42px;width:auto;opacity:0.95;"><span style="display:flex;align-items:center;gap:0.4rem;">Farnost Ostrov</span></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')" id="nav-toggle">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="o-farnosti.html">O farnosti</a></li>
+    <li><a href="zivotni-situace.html">Životní situace</a></li>
+    <li><a href="#aktuality">Aktuality</a></li>
+    <li><a href="#ohlasky">Ohlášky</a></li>
+    <li><a href="#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="#kontakty">Kontakty</a></li>
+  </ul>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="img/hero-banner.jpg" alt="Interiér kostela sv. Archanděla Michaela, Ostrov">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Římskokatolická</p>
+    <h1 class="hero-title">Farnost<em>Ostrov</em></h1>
+    <p class="hero-subtitle">Kostel sv. Michaela Archanděla a Panny Marie Věrné</p>
+    <div class="hero-divider"></div>
+    <p class="hero-welcome">Vítáme vás na webových stránkách ostrovské farnosti.<br>Jejich obsah se bude postupně rozšiřovat.</p>
+  </div>
+</section>
+
+<!-- RYCHLÉ LINKY -->
+<section class="rychle-linky" id="o-farnosti">
+  <div class="rychle-linky-grid">
+    <a class="rychle-linky-item" href="#bohosluzby">
+      <div class="rychle-linky-kruh">⛪</div>
+      <span class="rychle-linky-label">Bohoslužby</span>
+    </a>
+    <a class="rychle-linky-item" href="#ohlasky">
+      <div class="rychle-linky-kruh">✦</div>
+      <span class="rychle-linky-label">Nabízíme</span>
+    </a>
+    <a class="rychle-linky-item" href="#kontakty">
+      <div class="rychle-linky-kruh">✉</div>
+      <span class="rychle-linky-label">Rychlý kontakt</span>
+    </a>
+  </div>
+</section>
+
+<!-- OHLÁŠKY -->
+<section class="ohlasy" id="aktuality">
+  <div class="ohlasy-inner">
+    <p class="section-label">Farní život</p>
+    <h2 class="section-title">Aktuality</h2>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-cross">✦</span>
+      <span class="ornament-line rev"></span>
+    </div>
+    <div class="ohlasy-content">
+
+
+      <div class="aktuality-grid">
+
+        <a href="aktualita-zehnani-pokrmu.html" class="aktuality-karta-odkaz">
+          <div class="aktuality-karta">
+            <img src="ohlasky/zehnani-pokrmu.webp" alt="Žehnání pokrmů" class="aktuality-karta-img">
+            <div class="aktuality-karta-body">
+              <p class="aktuality-karta-meta">Slavnost Zmrtvýchvstání Páně · 5. dubna 2026</p>
+              <h3 class="aktuality-karta-title">Žehnání pokrmů</h3>
+              <p class="aktuality-karta-perex">Tradiční součást oslav Zmrtvýchvstání Páně. Přineste své dary na připravený stoleček v přední části kostela — žehnání proběhne v závěru slavnostní mše.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="aktualita-krizova-cesta-farnosti.html" class="aktuality-karta-odkaz">
+          <div class="aktuality-karta">
+            <img src="aktuality/ostrov-ruda-vez-smrti.webp" alt="Modlitba za Ostrov – pěší pouť" class="aktuality-karta-img">
+            <div class="aktuality-karta-body">
+              <p class="aktuality-karta-meta">Sobota 4. dubna 2026 · 9:00</p>
+              <h3 class="aktuality-karta-title">Modlitba za Ostrov</h3>
+              <p class="aktuality-karta-perex">Pěší putování pro požehnání všem obyvatelům Ostrovska — 26 km s modlitbou na vybraných místech města i okolí.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="aktualita-velikonoce-2026.html" class="aktuality-karta-odkaz">
+          <div class="aktuality-karta">
+            <img src="img/velikonoce.webp" alt="Velikonoční pořad bohoslužeb" class="aktuality-karta-img">
+            <div class="aktuality-karta-body">
+              <p class="aktuality-karta-meta">Velikonoce 2026</p>
+              <h3 class="aktuality-karta-title">Velikonoční pořad bohoslužeb</h3>
+              <p class="aktuality-karta-perex">Pořad bohoslužeb během Svatého týdne a Velikonočního tridua — Zelený čtvrtek, Velký pátek, Vigilie a Neděle Zmrtvýchvstání.</p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ohlasy" id="ohlasky">
+  <div class="ohlasy-inner">
+    <p class="section-label">Farní život</p>
+    <h2 class="section-title">Ohlášky</h2>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-cross">✦</span>
+      <span class="ornament-line rev"></span>
+    </div>
+    <div class="ohlasy-content">
+      <div class="ohlaska-list">
+
+        <div class="ohlaska-item">
+          <div class="ohlaska-datum">1. neděle velikonoční<br>2026 · cyklus A</div>
+          <div class="ohlaska-text">
+            <strong>Ohlášky – 1. neděle velikonoční</strong>
+            <a href="ohlasky/ohlasky´-1-nedele-velikonocni-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
+          </div>
+        </div>
+
+        <div class="ohlaska-item">
+          <div class="ohlaska-datum">Svatý týden<br>2026</div>
+          <div class="ohlaska-text">
+            <strong>Ohlášky – Svatý týden</strong>
+            <a href="ohlasky/svaty-tyden-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
+          </div>
+        </div>
+
+        <div class="ohlaska-item">
+          <div class="ohlaska-datum">5. neděle postní<br>2026 · cyklus A</div>
+          <div class="ohlaska-text">
+            <strong>Ohlášky – 5. neděle postní</strong>
+            <a href="ohlasky/5-nedele-postni-26-A.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
+          </div>
+        </div>
+
+        <div class="ohlaska-item">
+          <div class="ohlaska-datum">4. neděle postní<br>2025 · cyklus A</div>
+          <div class="ohlaska-text">
+            <strong>Ohlášky – 4. neděle postní</strong>
+            <a href="ohlasky/4-nedele-postni-25-A.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  
+  
+
+<!-- POŘAD BOHOSLUŽEB -->
+<section class="bohosluzby" id="bohosluzby">
+  <div style="max-width:1100px;margin:0 auto;text-align:center">
+    <p class="section-label">Liturgický život</p>
+    <h2 class="section-title">Pořad bohoslužeb</h2>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-cross">✦</span>
+      <span class="ornament-line rev"></span>
+    </div>
+  </div>
+  <div class="bohosluzby-grid">
+    <div class="boz-box">
+      <div class="boz-mesto"><a href="ostrov-kostel-sv-michaela.html" class="boz-mesto-link">Ostrov</a></div>
+      <div class="boz-row"><span class="boz-den">Neděle</span><span class="boz-cas">9:00</span></div>
+      <div class="boz-row"><span class="boz-den">Úterý</span><span class="boz-cas">18:00</span></div>
+      <div class="boz-row"><span class="boz-den">Středa</span><span class="boz-cas">18:00</span></div>
+      <div class="boz-row"><span class="boz-den">Čtvrtek</span><span class="boz-cas">18:00</span></div>
+      <div class="boz-row"><span class="boz-den">Pátek</span><span class="boz-cas">18:00</span></div>
+    </div>
+    <div class="boz-box">
+      <div class="boz-mesto"><a href="jachymov-kostel-sv-jachyma.html" class="boz-mesto-link">Jáchymov</a></div>
+      <div class="boz-row"><span class="boz-den">Neděle</span><span class="boz-cas">10:50</span></div>
+      <div class="boz-row"><span class="boz-den">Středa</span><span class="boz-cas">16:00</span></div>
+    </div>
+    <div class="boz-box">
+      <div class="boz-mesto"><a href="horni-blatna-kostel-sv-vavrince.html" class="boz-mesto-link">Horní Blatná</a></div>
+      <div class="boz-row"><span class="boz-den">1. sobota v měsíci</span><span class="boz-cas">17:00</span></div>
+      <div class="boz-row" style="font-size:0.78rem;color:rgba(245,228,176,0.4);font-style:italic;margin-top:0.1rem"><span>(s nedělní platností)</span></div>
+    </div>
+    <div class="boz-box">
+      <div class="boz-mesto"><a href="abertamy-kostel-ctrnacti-sv-pomocniku.html" class="boz-mesto-link">Abertamy</a></div>
+      <div class="boz-row"><span class="boz-den">ostatní soboty</span><span class="boz-cas">17:00</span></div>
+      <div class="boz-row" style="font-size:0.78rem;color:rgba(245,228,176,0.4);font-style:italic;margin-top:0.1rem"><span>(s nedělní platností)</span></div>
+    </div>
+  </div>
+  <!-- Kaple sv. Rodiny – sezónní -->
+  <div class="kaple-banner">
+    <span class="kaple-banner-icon">⛪</span>
+    <div class="kaple-banner-body">
+      <p class="kaple-banner-title">Kaple sv. Rodiny &nbsp;·&nbsp; DPD Ostrov</p>
+      <p class="kaple-banner-subtitle">Sobotní mše sv. s nedělní platností — sezónně od listopadu do konce března</p>
+    </div>
+    <div class="kaple-banner-time">
+      <small>Sobota</small>
+      15:00
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer id="kontakty">
+  <div class="footer-grid">
+    <!-- Sloupec 1: Farnost -->
+    <div>
+      <p class="footer-col-title">Farnost</p>
+      <div class="footer-address">
+        Římskokatolická farnost Ostrov<br>
+        Malé náměstí 25<br>
+        363 01 Ostrov<br><br>
+        <a href="/cdn-cgi/l/email-protection#5076736160626b767369676b76736161646b76736161606b76736161616b76736161656b76736161666b767364666b76736161616b76736161656b76736161666b76736161646b76736161616b76736161686b767366646b767369686b76736160656b76736161626b767364666b767369696b76736162626b">&#102;&#97;&#114;&#110;&#111;&#115;&#116;&#46;&#111;&#115;&#116;&#114;&#111;&#118;&#64;&#98;&#105;&#112;&#46;&#99;&#122;</a><br>
+        <a href="https://www.facebook.com/farnostostrov" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;margin-bottom:2px"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg> Facebook farnosti</a><br><br>
+        Číslo účtu: 801809379/0800
+      </div>
+    </div>
+    <!-- Sloupec 2: Kontaktní osoby -->
+    <div>
+      <p class="footer-col-title">Kontaktní osoby</p>
+      <div class="footer-person">
+        <div class="footer-person-name">Milan Geiger</div>
+        <div class="footer-person-detail">
+          <a href="/cdn-cgi/l/email-protection#cdebeefcfdfef6ebeefcfdfcf6ebeefcfdf8f6ebeefcfdfef6ebeefcfdfcf6ebeefcfcf9f6ebeefbf9f6ebeef4f5f6ebeefcfdf8f6ebeefcfcfff6ebeef9fbf6ebeef4f4f6ebeefcfffff6">&#103;&#101;&#105;&#103;&#101;&#114;&#64;&#98;&#105;&#112;&#46;&#99;&#122;</a><br>
+          <a href="tel:+420731697408">+420 731 697 408</a>
+        </div>
+      </div>
+      <div class="footer-person">
+        <div class="footer-person-name">Pavel Fořt</div>
+        <div class="footer-person-detail">
+          <a href="mailto:pavel.fort@bip.cz">pavel.fort@bip.cz</a><br>
+          <a href="tel:+420737546649">+420 737 546 649</a>
+        </div>
+      </div>
+      <div class="footer-person" style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,146,42,0.2);">
+        <div class="footer-person-name" style="letter-spacing:0.18em; font-size:0.72rem; color:var(--gold);">Kancelář</div>
+        <div class="footer-person-detail">
+          <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
+          <a href="tel:+420604835064">+420 604 835 064</a>
+        </div>
+      </div>
+    </div>
+    <!-- Sloupec 3: Sběr kontaktů -->
+    <div>
+      <p class="footer-col-title">Zůstaňte v kontaktu</p>
+      <p style="font-size:0.85rem;color:rgba(245,228,176,0.6);margin:0 0 1rem;">Zanechte nám svůj kontakt a budeme vás informovat o dění ve farnosti.</p>
+      <form class="footer-form">
+        <input type="hidden" name="access_key" value="16374971-e3b5-49fe-bbec-5cff6190f678">
+        <input type="hidden" name="subject" value="Nový kontakt z webu farnosti Ostrov">
+        <input type="text" name="name" placeholder="Vaše jméno" required>
+        <input type="email" name="email" placeholder="Váš e-mail" required>
+        <button type="submit">Přihlásit se</button>
+        <p class="footer-form-success" id="fc-success">✓ &nbsp;Děkujeme, kontakt byl uložen.</p>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">Farnost Ostrov ✝</div>
+    <div class="footer-copy">© 2026 TEE Design CZ – vibe4you</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="this.classList.remove('open')">
+  <img src="img/Chvály3.26.png" alt="Večer chval – leták">
+</div>
+
+<script>
+  // Kontaktní formulář v patičce
+  document.querySelector('.footer-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Odesílám…';
+    btn.disabled = true;
+    const payload = {
+      access_key: '16374971-e3b5-49fe-bbec-5cff6190f678',
+      subject: 'Nový kontakt z webu farnosti Ostrov',
+      name: this.querySelector('[name="name"]').value,
+      email: this.querySelector('[name="email"]').value
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+           body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      if (result.success) {
+        document.querySelector('.footer-form-success').style.display = 'block';
+        this.reset();
+      }
+    } catch (err) {}
+    btn.textContent = 'Odeslat';
+    btn.disabled = false;
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>

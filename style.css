@@ -1,0 +1,808 @@
+/* ── FARNOST OSTROV – sdílené styly ── */
+
+:root {
+  --gold: #c9922a;
+  --gold-light: #e8c06a;
+  --gold-pale: #f5e4b0;
+  --dark: #1a1208;
+  --dark-mid: #2a1e0a;
+  --burgundy: #5c1a1a;
+  --cream: #f9f3e3;
+  --text: #2d2010;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'EB Garamond', serif;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 3rem;
+  background: linear-gradient(to bottom, rgba(10,6,2,0.92) 0%, transparent 100%);
+  backdrop-filter: blur(2px);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold-pale); font-size: 1.1rem; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; margin: 0; padding: 0; }
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-pale);
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.3s, color 0.3s;
+}
+.nav-links a:hover,
+.nav-links a.active { opacity: 1; color: var(--gold-light); }
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--gold-pale);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* ── PŘÍSPĚVEK HERO ── */
+.prispevek-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  max-height: 640px;
+  overflow: hidden;
+}
+.prispevek-hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.prispevek-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,6,2,0.25) 0%,
+    rgba(10,6,2,0.10) 35%,
+    rgba(10,6,2,0.65) 75%,
+    rgba(10,6,2,1) 100%
+  );
+}
+.prispevek-hero-meta {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 2rem;
+  z-index: 2;
+  animation: fadeup 1s ease both;
+}
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.prispevek-kategorie {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.prispevek-datum {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  color: rgba(245,228,176,0.6);
+  text-transform: uppercase;
+}
+
+/* ── PŘÍSPĚVEK OBSAH ── */
+.prispevek-obsah {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+  overflow-x: hidden;
+}
+
+/* Zpět-linka */
+.prispevek-zpet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0.7;
+  margin-bottom: 2.5rem;
+  transition: opacity 0.3s;
+}
+.prispevek-zpet:hover { opacity: 1; }
+.prispevek-zpet::before {
+  content: '←';
+  font-family: serif;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+}
+
+/* Ornament */
+.ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin: 2rem 0 2.5rem;
+}
+.ornament-line { flex: 1; max-width: 120px; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+.ornament-line.rev { background: linear-gradient(to left, transparent, var(--gold)); }
+.ornament-cross { color: var(--gold); font-size: 1.1rem; }
+
+/* Titulek */
+.prispevek-nadpis {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+/* Perex */
+.prispevek-tritulek {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--gold-pale);
+  line-height: 1.7;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.prispevek-delici-linka {
+  width: 60px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0 auto 2.5rem;
+}
+
+/* Tělo */
+.prispevek-telo {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.9;
+  color: rgba(249,243,227,0.82);
+}
+.prispevek-telo p { margin-bottom: 1.4em; }
+.prispevek-telo p:last-child { margin-bottom: 0; }
+.prispevek-telo strong { font-weight: 500; color: var(--cream); }
+.prispevek-telo a,
+.prispevek-infobox a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(249,243,227,0.25);
+  transition: border-color 0.3s;
+}
+.prispevek-telo a:hover,
+.prispevek-infobox a:hover { border-color: rgba(249,243,227,0.7); }
+
+/* Info box */
+.prispevek-infobox {
+  border: 1px solid rgba(201,146,42,0.2);
+  border-left: 3px solid var(--gold);
+  background: rgba(201,146,42,0.05);
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.75;
+  color: rgba(249,243,227,0.75);
+}
+.prispevek-infobox strong {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── VELIKONOČNÍ POŘAD ── */
+.vel-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 2.5rem 0 1.5rem;
+  opacity: 0.85;
+}
+.vel-den { border-top: 1px solid rgba(201,146,42,0.15); padding: 1.4rem 0 0.4rem; }
+.vel-den:first-child { border-top: none; }
+.vel-den-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.vel-datum { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.05rem; font-weight: 600; min-width: 7rem; }
+.vel-nazev { color: rgba(240,230,210,0.7); font-size: 0.78rem; font-family: 'Cinzel', serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.vel-row { display: flex; align-items: baseline; padding: 0.3rem 0; }
+.vel-cas { min-width: 4rem; color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.88rem; opacity: 0.85; }
+.vel-misto { min-width: 13rem; color: var(--cream); font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 500; }
+.vel-bohosluzba { color: rgba(240,230,210,0.75); font-family: 'EB Garamond', serif; font-size: 0.95rem; }
+.vel-pozn {
+  color: rgba(201,146,42,0.65); font-size: 0.8rem;
+  font-family: 'EB Garamond', serif; font-style: italic;
+  padding-left: 4rem; display: block;
+  margin-top: 0.1rem; margin-bottom: 0.4rem;
+}
+
+/* ── POŘAD BOHOSLUŽEB (grid na stránce příspěvku) ── */
+.bohosluzby-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.boz-box {
+  border: 1px solid rgba(201,146,42,0.2);
+  background: var(--dark-mid);
+  padding: 1.8rem 1.5rem;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+}
+.boz-box:hover { border-color: rgba(201,146,42,0.5); background: rgba(201,146,42,0.05); }
+.boz-box::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.boz-box:hover::before { opacity: 1; }
+.boz-mesto {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem; color: var(--gold-light);
+  margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(201,146,42,0.15);
+}
+.boz-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.55rem; font-size: 0.95rem; line-height: 1.5; }
+.boz-den { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,228,176,0.5); }
+.boz-cas { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--cream); }
+
+/* Kaple banner */
+.kaple-banner {
+  margin-top: 1.5rem; padding: 1.2rem 1.5rem;
+  border: 1px solid rgba(201,146,42,0.15);
+  background: var(--dark-mid);
+  display: flex; align-items: center; gap: 2rem;
+}
+.kaple-banner-icon { font-size: 1.6rem; flex-shrink: 0; opacity: 0.75; }
+.kaple-banner-body { flex: 1; }
+.kaple-banner-title { font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.22em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 0.25rem; }
+.kaple-banner-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.9rem; color: rgba(245,228,176,0.5); }
+.kaple-banner-time { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--cream); white-space: nowrap; text-align: right; flex-shrink: 0; }
+.kaple-banner-time small { display: block; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(245,228,176,0.5); text-transform: uppercase; margin-bottom: 0.2rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  border-top: 1px solid rgba(201,146,42,0.2);
+  padding: 5rem 3rem 2rem;
+}
+.footer-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(201,146,42,0.12);
+}
+.footer-col-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.4rem; }
+.footer-address { font-size: 1rem; line-height: 1.9; color: rgba(249,243,227,0.65); }
+.footer-address a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.footer-address a:hover { border-color: var(--gold-light); }
+.footer-person { margin-bottom: 1.5rem; }
+.footer-person-name { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--cream); margin-bottom: 0.3rem; }
+.footer-person-detail { font-size: 0.95rem; line-height: 1.8; color: rgba(249,243,227,0.55); }
+.footer-person-detail a { color: rgba(249,243,227,0.55); text-decoration: none; transition: color 0.3s; }
+.footer-person-detail a:hover { color: var(--gold-light); }
+.footer-form { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-form input, .footer-form textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,146,42,0.25);
+  outline: none; padding: 0.7rem 1rem;
+  font-family: 'EB Garamond', serif; font-size: 0.95rem;
+  color: var(--cream); width: 100%; transition: border-color 0.3s;
+}
+.footer-form input::placeholder, .footer-form textarea::placeholder { color: rgba(245,228,176,0.3); }
+.footer-form input:focus, .footer-form textarea:focus { border-color: rgba(201,146,42,0.6); }
+.footer-form textarea { resize: vertical; min-height: 90px; }
+.footer-form button {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border: none; padding: 0.75rem 1.4rem;
+  font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dark); cursor: pointer;
+  align-self: flex-start; transition: opacity 0.3s;
+}
+.footer-form button:hover { opacity: 0.85; }
+.footer-form-success { display: none; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--gold-light); margin-top: 0.3rem; }
+.footer-bottom {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem; padding-top: 1.8rem;
+}
+.footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 0.85rem; color: var(--gold); }
+.footer-copy { font-size: 0.85rem; color: rgba(249,243,227,0.25); font-style: italic; }
+
+/* ── ŽIVOTNÍ SITUACE – detail stránky (layout 75:25) ── */
+.zs-sit-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.zs-sit-sidebar {
+  position: sticky;
+  top: 5.5rem;
+}
+.zs-sit-sidebar-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(201,146,42,0.2);
+}
+.zs-sit-sidebar-nav { list-style: none; }
+.zs-sit-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,228,176,0.6);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(201,146,42,0.1);
+  transition: color 0.25s, padding-left 0.25s;
+}
+.zs-sit-sidebar-link::before {
+  content: '✦';
+  font-size: 0.45rem;
+  color: var(--gold);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: opacity 0.25s;
+}
+.zs-sit-sidebar-link:hover { color: var(--gold-light); padding-left: 0.35rem; }
+.zs-sit-sidebar-link:hover::before { opacity: 1; }
+.zs-sit-sidebar-link:last-child { border-bottom: none; }
+
+/* ── ŽIVOTNÍ SITUACE – přehledová stránka ── */
+.zs-prehled-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.zs-prehled-karta {
+  display: block;
+  text-decoration: none;
+  border: 1px solid rgba(201,146,42,0.35);
+  background: rgba(42,30,10,0.9);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.zs-prehled-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.zs-prehled-karta:hover .zs-prehled-img { transform: scale(1.04); }
+.zs-prehled-karta-obsah {
+  padding: 1.5rem 1.8rem 2rem;
+}
+.zs-prehled-karta::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.zs-prehled-karta:hover {
+  border-color: rgba(201,146,42,0.45);
+  background: rgba(201,146,42,0.04);
+  transform: translateY(-2px);
+}
+.zs-prehled-karta:hover::before { opacity: 1; }
+.zs-prehled-ikona {
+  display: block;
+  font-size: 1rem;
+  color: var(--gold);
+  opacity: 0.65;
+  margin-bottom: 0.75rem;
+}
+.zs-prehled-nadpis {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  color: var(--cream);
+  margin-bottom: 0.65rem;
+}
+.zs-prehled-text {
+  font-size: clamp(0.88rem, 1.4vw, 0.98rem);
+  line-height: 1.8;
+  color: rgba(249,243,227,0.6);
+  margin-bottom: 1rem;
+}
+.zs-prehled-vice {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.zs-prehled-karta:hover .zs-prehled-vice { opacity: 1; }
+
+/* ── RESPONZIVITA ── */
+@media (max-width: 900px) { .bohosluzby-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 860px) {
+  .zs-sit-layout { grid-template-columns: 1fr; }
+  .zs-sit-sidebar { position: static; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(201,146,42,0.15); }
+  .zs-sit-sidebar-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .zs-sit-sidebar-link { border: 1px solid rgba(201,146,42,0.2); padding: 0.45rem 0.85rem; border-bottom: 1px solid rgba(201,146,42,0.2); font-size: 0.63rem; }
+  .zs-sit-sidebar-link:last-child { border-bottom: 1px solid rgba(201,146,42,0.2); }
+}
+@media (max-width: 768px) { .zs-prehled-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .prispevek-obsah { padding-left: 1rem; padding-right: 1rem; }
+  .zs-prehled-karta-obsah { padding: 1rem 1.2rem 1.5rem; }
+  .zs-prehled-img { max-width: 100%; }
+}
+@media (max-width: 800px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { padding: 3rem 1.5rem 2rem; }
+}
+@media (max-width: 700px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 100%; right: 0; left: 0;
+    background: rgba(10,6,2,0.97); padding: 1rem 0;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { text-align: center; }
+  .nav-links a { display: block; padding: 0.85rem 1rem; font-size: 0.8rem; opacity: 1; }
+  .prispevek-hero { height: 50vw; min-height: 240px; }
+  .prispevek-hero-meta { bottom: 1.5rem; }
+}
+@media (max-width: 600px) {
+  .vel-row { flex-wrap: wrap; gap: 0.2rem; }
+  .vel-misto { min-width: 100%; }
+  .kaple-banner { flex-wrap: wrap; gap: 1rem; }
+  .kaple-banner-time { text-align: left; }
+}
+@media (max-width: 500px) { .bohosluzby-grid { grid-template-columns: 1fr; } }
+
+/* ── FOTOGALERIE ── */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+  margin: 2rem 0;
+}
+.galerie-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(201,146,42,0.15);
+  background: var(--dark-mid);
+  transition: border-color 0.3s, transform 0.3s;
+  margin: 0;
+}
+.galerie-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+.galerie-item:hover,
+.galerie-item:focus-visible {
+  border-color: rgba(201,146,42,0.45);
+  transform: translateY(-3px);
+  outline: none;
+}
+.galerie-item:hover::before,
+.galerie-item:focus-visible::before { opacity: 1; }
+.galerie-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.galerie-item:hover img,
+.galerie-item:focus-visible img { transform: scale(1.04); }
+.galerie-item-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,6,2,0);
+  display: flex; align-items: flex-end;
+  padding: 0.75rem;
+  transition: background 0.3s;
+  z-index: 1;
+}
+.galerie-item:hover .galerie-item-overlay,
+.galerie-item:focus-visible .galerie-item-overlay { background: rgba(10,6,2,0.4); }
+.galerie-item-caption {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-pale);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s, transform 0.3s;
+  line-height: 1.4;
+}
+.galerie-item:hover .galerie-item-caption,
+.galerie-item:focus-visible .galerie-item-caption { opacity: 1; transform: translateY(0); }
+
+/* ── GALERIE LIGHTBOX ── */
+.galerie-lb {
+  display: none;
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(10,6,2,0.96);
+  backdrop-filter: blur(10px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.galerie-lb.open { display: flex; }
+.galerie-lb-stage {
+  display: flex; align-items: center; justify-content: center;
+  flex: 1; width: 100%;
+  max-width: min(92vw, calc(90vh * 2));
+  cursor: default;
+}
+.galerie-lb-img {
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border: 1px solid rgba(201,146,42,0.28);
+  box-shadow: 0 8px 80px rgba(0,0,0,0.9);
+  display: block;
+  transition: opacity 0.18s ease;
+}
+.galerie-lb-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: rgba(201,146,42,0.08);
+  border: 1px solid rgba(201,146,42,0.3);
+  color: var(--gold-light);
+  width: 2.75rem; height: 2.75rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 0.9rem;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  z-index: 2;
+}
+.galerie-lb-close:hover { background: rgba(201,146,42,0.2); border-color: var(--gold); color: var(--cream); }
+.galerie-lb-prev,
+.galerie-lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(201,146,42,0.08);
+  border: 1px solid rgba(201,146,42,0.25);
+  color: var(--gold-light);
+  width: 3rem; height: 3rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.3rem;
+  transition: background 0.25s, border-color 0.25s;
+  z-index: 2;
+}
+.galerie-lb-prev { left: 1.5rem; }
+.galerie-lb-next { right: 1.5rem; }
+.galerie-lb-prev:hover,
+.galerie-lb-next:hover { background: rgba(201,146,42,0.2); border-color: var(--gold); }
+.galerie-lb-meta {
+  margin-top: 1.2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+.galerie-lb-caption {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(245,228,176,0.7);
+  min-height: 1.4em;
+}
+.galerie-lb-counter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(201,146,42,0.45);
+  margin-top: 0.35rem;
+}
+
+/* Nadpis sekce galerie */
+.galerie-sekce { margin-top: 3rem; }
+.galerie-sekce-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .galerie { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+@media (max-width: 600px) {
+  .galerie { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+  .galerie-lb-prev { left: 0.5rem; }
+  .galerie-lb-next { right: 0.5rem; }
+  .galerie-lb-close { top: 0.75rem; right: 0.75rem; }
+  .galerie-sekce-obal { padding-left: 0; padding-right: 0; }
+}
+@media (max-width: 420px) {
+  .galerie { grid-template-columns: 1fr; gap: 0.4rem; }
+}
+
+/* ── ITINERÁŘ POUTI ── */
+.itinerar { margin-top: 3rem; }
+.itinerar-nadpis {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  color: var(--cream);
+  line-height: 1.35;
+  margin-bottom: 0.9rem;
+}
+.itinerar-nadpis em {
+  display: block;
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.itinerar-note {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.97rem;
+  color: rgba(245,228,176,0.65);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(201,146,42,0.3);
+}
+.itinerar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.itinerar-table thead tr {
+  border-bottom: 1px solid rgba(201,146,42,0.4);
+}
+.itinerar-table th {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-weight: 400;
+}
+.itinerar-table td {
+  padding: 0.7rem 0.75rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: rgba(249,243,227,0.82);
+  border-bottom: 1px solid rgba(201,146,42,0.08);
+  vertical-align: middle;
+}
+.itinerar-table tbody tr:hover td { background: rgba(201,146,42,0.04); }
+.itinerar-table .it-bod { color: var(--cream); }
+.itinerar-table .it-km {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  color: rgba(245,228,176,0.5);
+  white-space: nowrap;
+  text-align: right;
+}
+.itinerar-table .it-cas {
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  white-space: nowrap;
+}
+.itinerar-footer {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(245,228,176,0.4);
+  text-align: left;
+  margin-top: 0.5rem;
+}
+@media (max-width: 600px) {
+  .itinerar-table th:nth-child(2),
+  .itinerar-table td:nth-child(2) { display: none; }
+}
+
+/* ── NAŠI KNĚŽÍ ── */
+.knez-karta {
+  padding: 1.2rem 1.4rem;
+  border: 1px solid rgba(201,146,42,0.2);
+  border-top: 2px solid rgba(201,146,42,0.5);
+  background: rgba(255,255,255,0.03);
+}
+.knez-jmeno {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.knez-role {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  color: rgba(245,228,176,0.75);
+  margin-bottom: 0.3rem;
+  font-style: italic;
+}
+.knez-obdobi {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(245,228,176,0.4);
+}
+.knez-karta--aktivni {
+  border-top: 2px solid var(--gold);
+  background: rgba(201,146,42,0.07);
+}
+@media (max-width: 860px) {
+  .knez-grid { grid-template-columns: repeat(2,1fr) !important; }
+}
+@media (max-width: 560px) {
+  .knez-grid { grid-template-columns: 1fr !important; }
+}

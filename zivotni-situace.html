@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Životní situace – Farnost Ostrov</title>
+<meta name="description" content="Životní situace ve farnosti Ostrov – informace o křtu, svatbě, pohřbu i hledání víry. Přehledně a srozumitelně na jednom místě.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.farnostostrov.cz/zivotni-situace.html">
+<meta property="og:site_name" content="Farnost Ostrov">
+<meta property="og:title" content="Životní situace – Farnost Ostrov">
+<meta property="og:description" content="Životní situace ve farnosti Ostrov – informace o křtu, svatbě, pohřbu i hledání víry. Přehledně a srozumitelně na jednom místě.">
+<meta property="og:image" content="https://www.farnostostrov.cz/img/cesta-zivotem.webp">
+<meta name="robots" content="index, follow">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YC8PFWZWHN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YC8PFWZWHN');
+</script>
+<link rel="icon" type="image/png" href="img/darnost-favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:0.7rem;">
+    <img src="img/erb-farnosti.png" alt="Erb farnosti" style="height:42px;width:auto;opacity:0.95;">
+    <span style="display:flex;align-items:center;gap:0.4rem;">Farnost Ostrov</span>
+  </a>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')" id="nav-toggle">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="o-farnosti.html">O farnosti</a></li>
+    <li><a href="zivotni-situace.html" class="active">Životní situace</a></li>
+    <li><a href="index.html#aktuality">Aktuality</a></li>
+    <li><a href="index.html#ohlasky">Ohlášky</a></li>
+    <li><a href="index.html#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="index.html#kontakty">Kontakty</a></li>
+  </ul>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</nav>
+
+<!-- HERO -->
+<div class="prispevek-hero">
+  <img
+    src="img/cesta-zivotem.webp"
+    alt="Kostel sv. Michaela – Ostrov"
+    class="prispevek-hero-img"
+  >
+  <div class="prispevek-hero-overlay"></div>
+  <div class="prispevek-hero-meta">
+    <p class="prispevek-kategorie">Farnost Ostrov</p>
+    <p class="prispevek-datum"></p>
+  </div>
+</div>
+
+<!-- OBSAH -->
+<article class="prispevek-obsah">
+
+  <h1 class="prispevek-nadpis">Životní situace</h1>
+
+  <div class="ornament">
+    <span class="ornament-line"></span>
+    <span class="ornament-cross">♡</span>
+    <span class="ornament-line rev"></span>
+  </div>
+
+  <h2 class="prispevek-tritulek">
+    V životě přicházejí chvíle, kdy hledáme oporu, směr nebo odpovědi.<br>
+    Farnost je tu pro vás – ať jde o radost i o těžké okamžiky.
+  </h2>
+
+  <div class="prispevek-delici-linka"></div>
+
+  <div class="zs-prehled-grid">
+
+    <a href="krest-ditete.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Křest dítěte</h3>
+        <p class="zs-prehled-text">Křest uvádí vaše dítě do vztahu s Bohem a do společenství křesťanů. Je to nezasloužený dar, který mu dáváte do života.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+    <a href="krest-dospeleho.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Křest dospělého</h3>
+        <p class="zs-prehled-text">Bůh volá každého člověka jedinečným způsobem. Pokud uvažujete o křtu, nejste na té cestě sami.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+    <a href="svatba-v-kostele.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Svatba v kostele</h3>
+        <p class="zs-prehled-text">Opřít vztah od počátku o Boha je víc než otázka estetiky. Příprava snoubenců trvá několik měsíců – obraťte se na nás s předstihem.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+    <a href="cirkevni-pohreb.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Církevní pohřeb</h3>
+        <p class="zs-prehled-text">Smuteční obřad je chvílí díků, vzpomínek i naděje. Farnost provází rodiny i přátele v těžkých okamžicích loučení.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+    <a href="navsteva-kostela.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Ostýchám se vstoupit do kostela</h3>
+        <p class="zs-prehled-text">Nevíte, jak se v kostele chovat? Není třeba se obávat – stačí vejít, tiše se posadit a poslouchat. Kostel je otevřen všem.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+    <a href="zajinam-se-o-krestanstvi.html" class="zs-prehled-karta">
+      <div class="zs-prehled-karta-obsah">
+        <h3 class="zs-prehled-nadpis">Zajímám se o křesťanství</h3>
+        <p class="zs-prehled-text">Hledáte smysl nebo odpovědi na velké otázky? Farnost je tu pro každého, kdo hledá – bez podmínek a bez tlaku.</p>
+        <span class="zs-prehled-vice">Více informací →</span>
+      </div>
+    </a>
+
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer id="kontakty">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-col-title">Farnost</p>
+      <div class="footer-address">
+        Římskokatolická farnost Ostrov<br>
+        Malé náměstí 25<br>
+        363 01 Ostrov<br><br>
+        <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
+        <a href="tel:+420604835064">+420 604 835 064</a><br><br>
+        Číslo účtu: 801809379/0800
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Kontaktní osoby</p>
+      <div class="footer-person">
+        <div class="footer-person-name">Milan Geiger</div>
+        <div class="footer-person-detail">
+          <a href="mailto:geiger@bip.cz">geiger@bip.cz</a><br>
+          <a href="tel:+420731697408">+420 731 697 408</a>
+        </div>
+      </div>
+      <div class="footer-person">
+        <div class="footer-person-name">Pavel Fořt</div>
+        <div class="footer-person-detail">
+          <a href="mailto:pavel.fort@bip.cz">pavel.fort@bip.cz</a><br>
+          <a href="tel:+420737546649">+420 737 546 649</a>
+        </div>
+      </div>
+      <div class="footer-person" style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,146,42,0.2);">
+        <div class="footer-person-name" style="letter-spacing:0.18em; font-size:0.72rem; color:var(--gold);">Kancelář</div>
+        <div class="footer-person-detail">
+          <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
+          <a href="tel:+420604835064">+420 604 835 064</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Zůstaňte v kontaktu</p>
+      <p style="font-size:0.85rem;color:rgba(245,228,176,0.6);margin:0 0 1rem;">Zanechte nám svůj kontakt a budeme vás informovat o dění ve farnosti.</p>
+      <form class="footer-form" id="footer-contact-form">
+        <input type="hidden" name="access_key" value="16374971-e3b5-49fe-bbec-5cff6190f678">
+        <input type="hidden" name="subject" value="Nový kontakt z webu farnosti Ostrov">
+        <input type="text" name="name" placeholder="Vaše jméno" required>
+        <input type="email" name="email" placeholder="Váš e-mail" required>
+        <button type="submit">Přihlásit se</button>
+        <p class="footer-form-success" id="fc-success">✓ &nbsp;Děkujeme, kontakt byl uložen.</p>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">Farnost Ostrov ✝</div>
+    <div class="footer-copy">© 2026 Římskokatolická farnost Ostrov &nbsp;·&nbsp; Biskupství Plzeňské</div>
+  </div>
+  <div style="text-align:center;padding-top:1rem;font-family:'EB Garamond',serif;font-size:0.75rem;font-style:italic;color:rgba(249,243,227,0.25);">Autor: TEE Design CZ – vibe4you</div>
+</footer>
+
+<script>
+  document.getElementById('footer-contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Odesílám…';
+    btn.disabled = true;
+    const payload = {
+      access_key: '16374971-e3b5-49fe-bbec-5cff6190f678',
+      subject: 'Nový kontakt z webu farnosti Ostrov',
+      name: this.querySelector('[name="name"]').value,
+      email: this.querySelector('[name="email"]').value
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if ((await res.json()).success) {
+        document.getElementById('fc-success').style.display = 'block';
+        this.reset();
+      }
+    } catch (err) {}
+    btn.textContent = 'Přihlásit se';
+    btn.disabled = false;
+  });
+</script>
+
+</body>
+</html>

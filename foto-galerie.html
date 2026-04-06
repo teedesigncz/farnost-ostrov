@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotogalerie – Farnost Ostrov</title>
+<meta name="description" content="Fotografie z farního života – bohoslužby, setkání, kostely a místa naší farnosti.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.farnostostrov.cz/foto-galerie.html">
+<meta property="og:site_name" content="Farnost Ostrov">
+<meta property="og:title" content="Fotogalerie – Farnost Ostrov">
+<meta property="og:description" content="Fotografie z farního života – bohoslužby, setkání, kostely a místa naší farnosti.">
+<meta property="og:image" content="https://www.farnostostrov.cz/img/kostel-sv-michaela-ostrov-akvarel.webp">
+<meta name="robots" content="index, follow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YC8PFWZWHN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YC8PFWZWHN');
+</script>
+<link rel="icon" type="image/png" href="img/darnost-favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:0.7rem;">
+    <img src="img/erb-farnosti.png" alt="Erb farnosti" style="height:42px;width:auto;opacity:0.95;">
+    <span style="display:flex;align-items:center;gap:0.4rem;">Farnost Ostrov</span>
+  </a>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')" id="nav-toggle">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="o-farnosti.html" class="active">O farnosti</a></li>
+    <li><a href="zivotni-situace.html">Životní situace</a></li>
+    <li><a href="index.html#aktuality">Aktuality</a></li>
+    <li><a href="index.html#ohlasky">Ohlášky</a></li>
+    <li><a href="index.html#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="index.html#kontakty">Kontakty</a></li>
+  </ul>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</nav>
+
+<!-- HERO -->
+<div class="prispevek-hero">
+  <img src="img/kostel-sv-michaela-ostrov-akvarel.webp" alt="Farnost Ostrov" class="prispevek-hero-img">
+  <div class="prispevek-hero-overlay"></div>
+  <div class="prispevek-hero-meta">
+    <p class="prispevek-kategorie">Farnost Ostrov</p>
+    <p class="prispevek-datum"></p>
+  </div>
+</div>
+
+<!-- OBSAH -->
+<article class="prispevek-obsah" style="max-width:1060px;">
+
+  <a href="o-farnosti.html" class="prispevek-zpet">O farnosti</a>
+
+  <div class="zs-sit-layout">
+
+    <!-- HLAVNÍ SLOUPEC -->
+    <div class="zs-sit-main">
+
+      <h1 class="prispevek-nadpis">Fotogalerie</h1>
+
+      <div class="ornament">
+        <span class="ornament-line"></span>
+        <span class="ornament-cross">✝</span>
+        <span class="ornament-line rev"></span>
+      </div>
+
+      <p class="prispevek-tritulek">
+        Okamžiky z farního života, bohoslužeb a míst, která tvoří naše společenství.
+      </p>
+
+      <div class="prispevek-delici-linka"></div>
+
+
+      <!-- ════════════════════════════════════════════
+           GALERIE 1 – Farní život
+           ════════════════════════════════════════════ -->
+      <div class="galerie-sekce" id="farni-zivot">
+        <p class="galerie-sekce-title">Farní život</p>
+
+        <div class="galerie">
+
+          <figure class="galerie-item"
+                  data-src="img/sederova-vecer.webp"
+                  data-caption="Sederová večeře – Zelený čtvrtek 2026">
+            <img src="img/sederova-vecer.webp"
+                 alt="Sederová večeře – Zelený čtvrtek 2026">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Sederová večeře</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/krizova-cesta.webp"
+                  data-caption="Křížová cesta farností – postní doba 2026">
+            <img src="img/krizova-cesta.webp"
+                 alt="Křížová cesta farností – postní doba 2026">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Křížová cesta</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/velikonoce.webp"
+                  data-caption="Velikonoční bohoslužby 2026">
+            <img src="img/velikonoce.webp"
+                 alt="Velikonoční bohoslužby 2026">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Velikonoce 2026</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/chvaly.webp"
+                  data-caption="Večer chval">
+            <img src="img/chvaly.webp"
+                 alt="Večer chval">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Večer chval</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/cesta-zivotem.webp"
+                  data-caption="Cesta životem s farností">
+            <img src="img/cesta-zivotem.webp"
+                 alt="Cesta životem s farností">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Cesta životem</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/ohlasky.webp"
+                  data-caption="Farní ohlášky">
+            <img src="img/ohlasky.webp"
+                 alt="Farní ohlášky">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Ohlášky</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/hero-banner.jpg"
+                  data-caption="Interiér kostela sv. Michaela Archanděla, Ostrov">
+            <img src="img/hero-banner.jpg"
+                 alt="Interiér kostela sv. Michaela Archanděla, Ostrov">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Kostel sv. Michaela</span>
+            </div>
+          </figure>
+
+        </div><!-- /.galerie -->
+      </div><!-- /.galerie-sekce -->
+
+
+      <!-- ════════════════════════════════════════════
+           GALERIE 2 – Naše kostely
+           ════════════════════════════════════════════ -->
+      <div class="galerie-sekce" id="nase-kostely">
+        <p class="galerie-sekce-title">Naše kostely</p>
+
+        <div class="galerie">
+
+          <figure class="galerie-item"
+                  data-src="img/kostel-sv-michaela-ostrov-akvarel.webp"
+                  data-caption="Kostel sv. Michaela Archanděla – Ostrov">
+            <img src="img/kostel-sv-michaela-ostrov-akvarel.webp"
+                 alt="Kostel sv. Michaela Archanděla – Ostrov">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Ostrov</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/jachymov-kostel-sv-jachyma.webp"
+                  data-caption="Kostel sv. Jáchyma – Jáchymov">
+            <img src="img/jachymov-kostel-sv-jachyma.webp"
+                 alt="Kostel sv. Jáchyma – Jáchymov">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Jáchymov</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/bozi-dar-kostel-sv-anny.webp"
+                  data-caption="Kostel sv. Anny – Boží Dar">
+            <img src="img/bozi-dar-kostel-sv-anny.webp"
+                 alt="Kostel sv. Anny – Boží Dar">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Boží Dar</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/horni-blatna-kostel-sv-vavrince.webp"
+                  data-caption="Kostel sv. Vavřince – Horní Blatná">
+            <img src="img/horni-blatna-kostel-sv-vavrince.webp"
+                 alt="Kostel sv. Vavřince – Horní Blatná">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Horní Blatná</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/abertamy-koste-ctrnaciti-svatych-pomocniku.webp"
+                  data-caption="Kostel Čtrnácti sv. pomocníků – Abertamy">
+            <img src="img/abertamy-koste-ctrnaciti-svatych-pomocniku.webp"
+                 alt="Kostel Čtrnácti sv. pomocníků – Abertamy">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Abertamy</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/pernink-nejsvětější-trojice.webp"
+                  data-caption="Kostel Nejsvětější Trojice – Pernink">
+            <img src="img/pernink-nejsvětější-trojice.webp"
+                 alt="Kostel Nejsvětější Trojice – Pernink">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Pernink</span>
+            </div>
+          </figure>
+
+          <figure class="galerie-item"
+                  data-src="img/velichov-kostel-nanebevzeti-panny-marie.webp"
+                  data-caption="Kostel Nanebevzetí Panny Marie – Velichov">
+            <img src="img/velichov-kostel-nanebevzeti-panny-marie.webp"
+                 alt="Kostel Nanebevzetí Panny Marie – Velichov">
+            <div class="galerie-item-overlay">
+              <span class="galerie-item-caption">Velichov</span>
+            </div>
+          </figure>
+
+        </div><!-- /.galerie -->
+      </div><!-- /.galerie-sekce -->
+
+
+    </div><!-- /.zs-sit-main -->
+
+    <!-- POSTRANNÍ PANEL -->
+    <aside class="zs-sit-sidebar">
+
+      <p class="zs-sit-sidebar-title">Galerie</p>
+      <ul class="zs-sit-sidebar-nav">
+        <li><a href="#farni-zivot" class="zs-sit-sidebar-link">Farní život</a></li>
+        <li><a href="#nase-kostely" class="zs-sit-sidebar-link">Naše kostely</a></li>
+      </ul>
+
+      <p class="zs-sit-sidebar-title" style="margin-top:2rem;">O farnosti</p>
+      <ul class="zs-sit-sidebar-nav">
+        <li><a href="o-farnosti.html" class="zs-sit-sidebar-link">Zpět na O farnosti</a></li>
+        <li><a href="nase-kostely.html" class="zs-sit-sidebar-link">Přehled kostelů</a></li>
+        <li><a href="nasi-knezi.html" class="zs-sit-sidebar-link">Naši kněží</a></li>
+      </ul>
+
+    </aside>
+
+  </div><!-- /.zs-sit-layout -->
+
+</article>
+
+<!-- FOOTER -->
+<footer id="kontakty">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-col-title">Farnost</p>
+      <div class="footer-address">
+        Římskokatolická farnost Ostrov<br>
+        Malé náměstí 25<br>
+        363 01 Ostrov<br><br>
+        <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
+        <a href="tel:+420604835064">+420 604 835 064</a><br><br>
+        Číslo účtu: 801809379/0800
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Kontaktní osoby</p>
+      <div class="footer-person">
+        <div class="footer-person-name">Milan Geiger</div>
+        <div class="footer-person-detail">
+          <a href="mailto:geiger@bip.cz">geiger@bip.cz</a><br>
+          <a href="tel:+420731697408">+420 731 697 408</a>
+        </div>
+      </div>
+      <div class="footer-person">
+        <div class="footer-person-name">Pavel Fořt</div>
+        <div class="footer-person-detail">
+          <a href="mailto:pavel.fort@bip.cz">pavel.fort@bip.cz</a><br>
+          <a href="tel:+420737546649">+420 737 546 649</a>
+        </div>
+      </div>
+      <div class="footer-person" style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,146,42,0.2);">
+        <div class="footer-person-name" style="letter-spacing:0.18em; font-size:0.72rem; color:var(--gold);">Kancelář</div>
+        <div class="footer-person-detail">
+          <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
+          <a href="tel:+420604835064">+420 604 835 064</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Zůstaňte v kontaktu</p>
+      <p style="font-size:0.85rem;color:rgba(245,228,176,0.6);margin:0 0 1rem;">Zanechte nám svůj kontakt a budeme vás informovat o dění ve farnosti.</p>
+      <form class="footer-form" id="footer-contact-form">
+        <input type="hidden" name="access_key" value="16374971-e3b5-49fe-bbec-5cff6190f678">
+        <input type="hidden" name="subject" value="Nový kontakt z webu farnosti Ostrov">
+        <input type="text" name="name" placeholder="Vaše jméno" required>
+        <input type="email" name="email" placeholder="Váš e-mail" required>
+        <button type="submit">Přihlásit se</button>
+        <p class="footer-form-success" id="fc-success">✓ &nbsp;Děkujeme, kontakt byl uložen.</p>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">Farnost Ostrov ✝</div>
+    <div class="footer-copy">© 2026 Římskokatolická farnost Ostrov &nbsp;·&nbsp; Biskupství Plzeňské</div>
+  </div>
+  <div style="text-align:center;padding-top:1rem;font-family:'EB Garamond',serif;font-size:0.75rem;font-style:italic;color:rgba(249,243,227,0.25);">Autor: TEE Design CZ – vibe4you</div>
+</footer>
+
+<script>
+  document.getElementById('footer-contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Odesílám…';
+    btn.disabled = true;
+    const payload = {
+      access_key: '16374971-e3b5-49fe-bbec-5cff6190f678',
+      subject: 'Nový kontakt z webu farnosti Ostrov',
+      name: this.querySelector('[name="name"]').value,
+      email: this.querySelector('[name="email"]').value
+    };
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if ((await res.json()).success) {
+        document.getElementById('fc-success').style.display = 'block';
+        this.reset();
+      }
+    } catch (err) {}
+    btn.textContent = 'Přihlásit se';
+    btn.disabled = false;
+  });
+</script>
+
+<!-- Sdílený skript fotogalerie -->
+<script src="gallery.js" defer></script>
+
+</body>
+</html>
