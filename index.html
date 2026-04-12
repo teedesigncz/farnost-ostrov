@@ -834,6 +834,162 @@
     text-transform: uppercase;
     margin-bottom: 0.5rem;
   }
+
+  /* ── NÁSTĚNKA – AKCE ── */
+  .nastenka-board {
+    margin-top: 3rem;
+    padding: 3rem 2.5rem 3.5rem;
+    background: #180f05;
+    background-image:
+      radial-gradient(ellipse at 15% 40%, rgba(90,55,10,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 70%, rgba(60,35,5,0.2) 0%, transparent 55%);
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.6), 0 2px 0 rgba(201,146,42,0.08);
+    border: 1px solid rgba(201,146,42,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem 2.5rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .plakat-pin {
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .plakat-pin:nth-child(5n+1) { transform: rotate(-2.5deg); }
+  .plakat-pin:nth-child(5n+2) { transform: rotate(1.8deg); }
+  .plakat-pin:nth-child(5n+3) { transform: rotate(-1.2deg); }
+  .plakat-pin:nth-child(5n+4) { transform: rotate(2.3deg); }
+  .plakat-pin:nth-child(5n+5) { transform: rotate(-0.7deg); }
+  .plakat-pin::before {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0d060, #7a4a08);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.7), inset 0 -1px 2px rgba(0,0,0,0.4);
+    z-index: 2;
+  }
+  .plakat-pin:hover {
+    transform: rotate(0deg) scale(1.07) !important;
+    z-index: 10;
+  }
+  .plakat-pin:hover .plakat-img {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,146,42,0.3);
+  }
+  .plakat-img {
+    width: 190px;
+    display: block;
+    box-shadow: 3px 6px 18px rgba(0,0,0,0.65);
+    transition: box-shadow 0.3s;
+  }
+  .plakat-pin {
+    transition: transform 0.3s ease, z-index 0s;
+  }
+  .plakat-pdf-card {
+    width: 190px;
+    min-height: 260px;
+    background: #f5eed8;
+    color: #2a1a05;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 1.4rem 1.2rem;
+    box-shadow: 3px 6px 18px rgba(0,0,0,0.65);
+    transition: box-shadow 0.3s;
+  }
+  .plakat-pin:hover .plakat-pdf-card {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,146,42,0.3);
+  }
+  .plakat-pdf-icon svg {
+    width: 56px;
+    height: 56px;
+  }
+  .plakat-pdf-nazev {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .plakat-pdf-label {
+    font-size: 0.7rem;
+    color: #c9922a;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .nastenka-board {
+      padding: 2.5rem 1rem 3rem;
+      gap: 2rem 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+    }
+    .plakat-img {
+      width: 100%;
+    }
+    .plakat-pdf-card {
+      width: 100%;
+    }
+  }
+
+  /* LIGHTBOX */
+  .plakat-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,4,1,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .plakat-lightbox.aktivni {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .plakat-lightbox-img {
+    max-height: 90vh;
+    max-width: 92vw;
+    width: auto;
+    display: block;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.9);
+    transform: scale(0.94);
+    transition: transform 0.25s ease;
+  }
+  .plakat-lightbox.aktivni .plakat-lightbox-img {
+    transform: scale(1);
+  }
+  .plakat-lightbox-zavrit {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: none;
+    border: 1px solid rgba(201,146,42,0.4);
+    color: var(--gold-light);
+    font-size: 1.3rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .plakat-lightbox-zavrit:hover {
+    background: rgba(201,146,42,0.12);
+    border-color: rgba(201,146,42,0.7);
+  }
 </style>
 </head>
 <body>
@@ -848,6 +1004,7 @@
     <li><a href="o-farnosti.html">O farnosti</a></li>
     <li><a href="zivotni-situace.html">Životní situace</a></li>
     <li><a href="#aktuality">Aktuality</a></li>
+    <li><a href="#akce">Akce</a></li>
     <li><a href="#ohlasky">Ohlášky</a></li>
     <li><a href="#bohosluzby">Pořad bohoslužeb</a></li>
     <li><a href="#kontakty">Kontakty</a></li>
@@ -945,6 +1102,104 @@
   </div>
 </section>
 
+<!-- AKCE / NÁSTĚNKA -->
+<section class="ohlasy" id="akce">
+  <div class="ohlasy-inner">
+    <p class="section-label">Farní život</p>
+    <h2 class="section-title">Nástěnka</h2>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-cross">✦</span>
+      <span class="ornament-line rev"></span>
+    </div>
+    <div class="nastenka-board" id="nastenka-board"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="plakat-lightbox" id="plakat-lightbox" onclick="zavriPlakat()">
+  <img class="plakat-lightbox-img" id="plakat-lightbox-img" src="" alt="">
+  <button class="plakat-lightbox-zavrit" onclick="zavriPlakat()" aria-label="Zavřít">✕</button>
+</div>
+<script>
+  function otevriPlakat(src, alt) {
+    var lb = document.getElementById('plakat-lightbox');
+    var img = document.getElementById('plakat-lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('aktivni');
+    document.body.style.overflow = 'hidden';
+  }
+  function zavriPlakat() {
+    document.getElementById('plakat-lightbox').classList.remove('aktivni');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') zavriPlakat();
+  });
+  document.getElementById('plakat-lightbox-img').addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+</script>
+<script>
+/* ── Nástěnka: načtení plakátů z JSON ── */
+(function () {
+  var board = document.getElementById('nastenka-board');
+  if (!board) return;
+
+  fetch('akce/nastenka.json')
+    .then(function (r) { return r.json(); })
+    .then(function (plakaty) {
+      plakaty.forEach(function (p) {
+        var pin = document.createElement('div');
+        pin.className = 'plakat-pin';
+
+        if (p.typ === 'pdf') {
+          /* PDF: otevře se v nové záložce */
+          pin.onclick = (function (soubor) {
+            return function () { window.open('akce/' + soubor, '_blank'); };
+          }(p.soubor));
+
+          var card = document.createElement('div');
+          card.className = 'plakat-pdf-card';
+
+          var icon = document.createElement('span');
+          icon.className = 'plakat-pdf-icon';
+          icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#c9922a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>';
+
+          var nazevEl = document.createElement('span');
+          nazevEl.className = 'plakat-pdf-nazev';
+          nazevEl.textContent = p.nazev;
+
+          var labelEl = document.createElement('span');
+          labelEl.className = 'plakat-pdf-label';
+          labelEl.textContent = 'PDF';
+
+          card.appendChild(icon);
+          card.appendChild(nazevEl);
+          card.appendChild(labelEl);
+          pin.appendChild(card);
+
+        } else {
+          /* Obrázek: otevře se v lightboxu */
+          pin.onclick = (function (soubor, nazev) {
+            return function () { otevriPlakat('akce/' + soubor, nazev); };
+          }(p.soubor, p.nazev));
+
+          var img = document.createElement('img');
+          img.src = 'akce/' + p.soubor;
+          img.alt = p.nazev;
+          img.className = 'plakat-img';
+          pin.appendChild(img);
+        }
+
+        board.appendChild(pin);
+      });
+    })
+    .catch(function () { /* nástěnka zůstane prázdná při chybě */ });
+}());
+</script>
+
 <section class="ohlasy" id="ohlasky">
   <div class="ohlasy-inner">
     <p class="section-label">Farní život</p>
@@ -958,6 +1213,14 @@
       <div class="ohlaska-list">
 
         <div class="ohlaska-item">
+          <div class="ohlaska-datum">2. neděle velikonoční<br>2026 · cyklus A</div>
+          <div class="ohlaska-text">
+            <strong>Ohlášky – 2. neděle velikonoční</strong>
+            <a href="ohlasky/ohlasky-2-nedele-velikonoce-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
+          </div>
+        </div>
+
+        <div class="ohlaska-item">
           <div class="ohlaska-datum">1. neděle velikonoční<br>2026 · cyklus A</div>
           <div class="ohlaska-text">
             <strong>Ohlášky – 1. neděle velikonoční</strong>
@@ -965,30 +1228,12 @@
           </div>
         </div>
 
-        <div class="ohlaska-item">
-          <div class="ohlaska-datum">Svatý týden<br>2026</div>
-          <div class="ohlaska-text">
-            <strong>Ohlášky – Svatý týden</strong>
-            <a href="ohlasky/svaty-tyden-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
-          </div>
-        </div>
 
-        <div class="ohlaska-item">
-          <div class="ohlaska-datum">5. neděle postní<br>2026 · cyklus A</div>
-          <div class="ohlaska-text">
-            <strong>Ohlášky – 5. neděle postní</strong>
-            <a href="ohlasky/5-nedele-postni-26-A.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
-          </div>
-        </div>
-
-        <div class="ohlaska-item">
-          <div class="ohlaska-datum">4. neděle postní<br>2025 · cyklus A</div>
-          <div class="ohlaska-text">
-            <strong>Ohlášky – 4. neděle postní</strong>
-            <a href="ohlasky/4-nedele-postni-25-A.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
-          </div>
-        </div>
-
+      </div>
+      <div style="text-align:right;margin-top:2rem;">
+        <a href="ohlasky-archiv-2026.html" style="font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.35);">
+          Archiv ohlášek 2026 &rarr;
+        </a>
       </div>
     </div>
   </div>
@@ -1047,102 +1292,10 @@
     </div>
   </div>
 </section>
-<!-- FOOTER -->
-<footer id="kontakty">
-  <div class="footer-grid">
-    <!-- Sloupec 1: Farnost -->
-    <div>
-      <p class="footer-col-title">Farnost</p>
-      <div class="footer-address">
-        Římskokatolická farnost Ostrov<br>
-        Malé náměstí 25<br>
-        363 01 Ostrov<br><br>
-        <a href="/cdn-cgi/l/email-protection#5076736160626b767369676b76736161646b76736161606b76736161616b76736161656b76736161666b767364666b76736161616b76736161656b76736161666b76736161646b76736161616b76736161686b767366646b767369686b76736160656b76736161626b767364666b767369696b76736162626b">&#102;&#97;&#114;&#110;&#111;&#115;&#116;&#46;&#111;&#115;&#116;&#114;&#111;&#118;&#64;&#98;&#105;&#112;&#46;&#99;&#122;</a><br>
-        <a href="https://www.facebook.com/farnostostrov" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;margin-bottom:2px"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg> Facebook farnosti</a><br><br>
-        Číslo účtu: 801809379/0800
-      </div>
-    </div>
-    <!-- Sloupec 2: Kontaktní osoby -->
-    <div>
-      <p class="footer-col-title">Kontaktní osoby</p>
-      <div class="footer-person">
-        <div class="footer-person-name">Milan Geiger</div>
-        <div class="footer-person-detail">
-          <a href="/cdn-cgi/l/email-protection#cdebeefcfdfef6ebeefcfdfcf6ebeefcfdf8f6ebeefcfdfef6ebeefcfdfcf6ebeefcfcf9f6ebeefbf9f6ebeef4f5f6ebeefcfdf8f6ebeefcfcfff6ebeef9fbf6ebeef4f4f6ebeefcfffff6">&#103;&#101;&#105;&#103;&#101;&#114;&#64;&#98;&#105;&#112;&#46;&#99;&#122;</a><br>
-          <a href="tel:+420731697408">+420 731 697 408</a>
-        </div>
-      </div>
-      <div class="footer-person">
-        <div class="footer-person-name">Pavel Fořt</div>
-        <div class="footer-person-detail">
-          <a href="mailto:pavel.fort@bip.cz">pavel.fort@bip.cz</a><br>
-          <a href="tel:+420737546649">+420 737 546 649</a>
-        </div>
-      </div>
-      <div class="footer-person" style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,146,42,0.2);">
-        <div class="footer-person-name" style="letter-spacing:0.18em; font-size:0.72rem; color:var(--gold);">Kancelář</div>
-        <div class="footer-person-detail">
-          <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
-          <a href="tel:+420604835064">+420 604 835 064</a>
-        </div>
-      </div>
-    </div>
-    <!-- Sloupec 3: Sběr kontaktů -->
-    <div>
-      <p class="footer-col-title">Zůstaňte v kontaktu</p>
-      <p style="font-size:0.85rem;color:rgba(245,228,176,0.6);margin:0 0 1rem;">Zanechte nám svůj kontakt a budeme vás informovat o dění ve farnosti.</p>
-      <form class="footer-form">
-        <input type="hidden" name="access_key" value="16374971-e3b5-49fe-bbec-5cff6190f678">
-        <input type="hidden" name="subject" value="Nový kontakt z webu farnosti Ostrov">
-        <input type="text" name="name" placeholder="Vaše jméno" required>
-        <input type="email" name="email" placeholder="Váš e-mail" required>
-        <button type="submit">Přihlásit se</button>
-        <p class="footer-form-success" id="fc-success">✓ &nbsp;Děkujeme, kontakt byl uložen.</p>
-      </form>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-logo">Farnost Ostrov ✝</div>
-    <div class="footer-copy">© 2026 TEE Design CZ – vibe4you</div>
-  </div>
-</footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox" onclick="this.classList.remove('open')">
-  <img src="img/Chvály3.26.png" alt="Večer chval – leták">
-</div>
+<div id="site-footer"></div>
+<script src="footer.js"></script>
 
 <script>
-  // Kontaktní formulář v patičce
-  document.querySelector('.footer-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    btn.textContent = 'Odesílám…';
-    btn.disabled = true;
-    const payload = {
-      access_key: '16374971-e3b5-49fe-bbec-5cff6190f678',
-      subject: 'Nový kontakt z webu farnosti Ostrov',
-      name: this.querySelector('[name="name"]').value,
-      email: this.querySelector('[name="email"]').value
-    };
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-           body: JSON.stringify(payload),
-      });
-      const result = await res.json();
-      if (result.success) {
-        document.querySelector('.footer-form-success').style.display = 'block';
-        this.reset();
-      }
-    } catch (err) {}
-    btn.textContent = 'Odeslat';
-    btn.disabled = false;
-  });
-
   // Scroll reveal
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
