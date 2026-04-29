@@ -522,17 +522,38 @@
     gap: 1.5rem;
   }
   .ohlaska-item {
-    display: grid;
-    grid-template-columns: 10rem 1fr;
-    gap: 1.5rem;
+    display: block;
+    width: 50%;
     padding: 1.4rem 1.5rem;
     border: 1px solid rgba(201,146,42,0.15);
     background: var(--dark-mid);
-    align-items: start;
   }
   .ohlaska-item:hover {
     border-color: rgba(201,146,42,0.35);
     background: rgba(201,146,42,0.04);
+  }
+  .ohlaska-nazev {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .ohlaska-nazev a { color: var(--gold-light); text-decoration: none; }
+  .ohlaska-nazev a:hover { color: var(--cream); }
+  .ohlaska-meta {
+    font-size: 0.78rem;
+    color: rgba(245,228,176,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .ohlaska-meta a {
+    color: var(--gold-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,146,42,0.3);
+    width: -moz-fit-content;
+    width: fit-content;
   }
   .ohlaska-datum {
     font-family: 'Cinzel', serif;
@@ -589,8 +610,7 @@
     box-shadow: 0 0 60px rgba(0,0,0,0.8);
   }
   @media (max-width: 700px) {
-    .ohlaska-item { grid-template-columns: 1fr; }
-    .ohlaska-datum { border-right: none; border-bottom: 1px solid rgba(201,146,42,0.2); padding-right: 0; padding-bottom: 0.6rem; }
+    .ohlaska-item { width: 100%; }
     .ohlaska-featured { grid-template-columns: 1fr; }
     .ohlaska-featured-img { width: 100px; margin-top: 0.5rem; }
   }
@@ -1240,9 +1260,15 @@
             return;
           }
           var o = data[0];
-          var href = 'ohlasky/' + encodeURIComponent(o.soubor);
-          var html = '<div class="ohlaska-item"><div class="ohlaska-text">';
-          html += '<a href="' + href + '" target="_blank" style="color:var(--cream);text-decoration:none;"><strong>' + esc(o.nazev) + '</strong></a>';
+          var href = o.soubor ? 'ohlasky/' + encodeURIComponent(o.soubor) : '';
+          var html = '<div class="ohlaska-item">';
+          html += '<div class="ohlaska-nazev">';
+          if (href) { html += '<a href="' + href + '" target="_blank">' + esc(o.nazev) + '</a>'; }
+          else { html += esc(o.nazev); }
+          html += '</div>';
+          html += '<div class="ohlaska-meta">';
+          if (o.poznamka) html += '<span>' + esc(o.poznamka) + '</span>';
+          if (href) html += '<a href="' + href + '" target="_blank">Zobrazít PDF →</a>';
           html += '</div></div>';
           list.innerHTML = html;
         })
