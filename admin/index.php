@@ -167,6 +167,7 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         /* Přidat ohlášky */
         if ($akce === 'pridat') {
             $nazev          = trim($_POST['nazev']          ?? '');
+            $poznamka       = trim($_POST['poznamka']       ?? '');
             $datum_expirace = trim($_POST['datum_expirace'] ?? '');
             $pinnováno      = !empty($_POST['pinnováno']);
             $upload         = $_FILES['soubor'] ?? null;
@@ -197,7 +198,8 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     }
                     if (move_uploaded_file($upload['tmp_name'], $cilCesta)) {
                         $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
-                                    'datum_expirace' => $datum_expirace, 'pinnováno' => $pinnováno];
+                                    'poznamka' => $poznamka, 'datum_expirace' => $datum_expirace,
+                                    'pinnováno' => $pinnováno];
                         $ohlasky = nactiJson(OHLASKY_JSON);
                         if ($pinnováno) {
                             array_unshift($ohlasky, $nova);
@@ -971,6 +973,10 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
           <label for="nazev">Název</label>
           <input type="text" id="nazev" name="nazev" placeholder="Ohlášky – 3. neděle velikonoční" required>
         </div>
+        <div class="form-group">
+          <label for="poznamka">Poznámka k ohlášce</label>
+          <input type="text" id="poznamka" name="poznamka" placeholder="např. platí i v pondělí">
+        </div>
         <div class="form-row">
           <div class="form-group">
             <label for="datum_expirace">Platí do (datum expirace)</label>
@@ -1018,6 +1024,9 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
                 <div class="ohlaska-row-nazev">
                   <?= $je_pinned ? '📌 ' : '' ?><?= h($o['nazev']) ?>
                 </div>
+                <?php if (!empty($o['poznamka'])): ?>
+                  <div class="ohlaska-row-datum" style="font-style:italic;"><?= h($o['poznamka']) ?></div>
+                <?php endif; ?>
                 <div class="ohlaska-row-datum"><?= h($exp_text) ?></div>
                 <div class="ohlaska-row-soubor">
                   <a href="../ohlasky/<?= h(rawurlencode($o['soubor'])) ?>" target="_blank" style="color:var(--gold)">📄 <?= h($o['soubor']) ?></a>
