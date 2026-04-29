@@ -2,13 +2,13 @@
   {
     "soubor": "ohlasky-2-nedele-velikonoce-26.pdf",
     "nazev": "Ohlášky – 2. neděle velikonoční",
-    "datum1": "2. neděle velikonoční",
-    "datum2": "2026 · cyklus A"
+    "datum_expirace": "2026-05-03",
+    "pinnováno": false
   },
   {
-    "soubor": "ohlasky\u00b4-1-nedele-velikonocni-26.pdf",
+    "soubor": "ohlasky´-1-nedele-velikonocni-26.pdf",
     "nazev": "Ohlášky – 1. neděle velikonoční",
-    "datum1": "1. neděle velikonoční",
-    "datum2": "2026 · cyklus A"
+    "datum_expirace": "2026-04-26",
+    "pinnováno": false
   }
 ]

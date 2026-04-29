@@ -143,15 +143,36 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     if ($sekce === 'ohlasky') {
 
+        /* Auto-archivace ohlášek s prošlým datem expirace */
+        {
+            $dnes_datum   = date('Y-m-d');
+            $ohlasky_auto = nactiJson(OHLASKY_JSON);
+            $archiv_auto  = nactiJson(OHLASKY_ARCHIV_JSON);
+            $auto_zmeneno = false;
+            $ohlasky_auto = array_filter($ohlasky_auto, function ($o) use ($dnes_datum, &$archiv_auto, &$auto_zmeneno) {
+                if (!empty($o['datum_expirace']) && $o['datum_expirace'] < $dnes_datum) {
+                    unset($o['pinnováno']);
+                    array_unshift($archiv_auto, $o);
+                    $auto_zmeneno = true;
+                    return false;
+                }
+                return true;
+            });
+            if ($auto_zmeneno) {
+                ulozJson(OHLASKY_JSON, array_values($ohlasky_auto));
+                ulozJson(OHLASKY_ARCHIV_JSON, $archiv_auto);
+            }
+        }
+
         /* Přidat ohlášky */
         if ($akce === 'pridat') {
-            $nazev  = trim($_POST['nazev']  ?? '');
-            $datum1 = trim($_POST['datum1'] ?? '');
-            $datum2 = trim($_POST['datum2'] ?? '');
-            $upload = $_FILES['soubor'] ?? null;
+            $nazev          = trim($_POST['nazev']          ?? '');
+            $datum_expirace = trim($_POST['datum_expirace'] ?? '');
+            $pinnováno      = !empty($_POST['pinnováno']);
+            $upload         = $_FILES['soubor'] ?? null;
 
-            if (empty($nazev) || empty($datum1)) {
-                $zprava = 'Zadejte název a datum ohlášek.'; $zprava_typ = 'chyba';
+            if (empty($nazev) || empty($datum_expirace)) {
+                $zprava = 'Zadejte název a datum expirace ohlášek.'; $zprava_typ = 'chyba';
             } elseif (!$upload || $upload['error'] !== UPLOAD_ERR_OK) {
                 $kody = [UPLOAD_ERR_INI_SIZE => 'Soubor je příliš velký (limit serveru).',
                          UPLOAD_ERR_FORM_SIZE => 'Soubor je příliš velký.',
@@ -175,18 +196,16 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                         $i++;
                     }
                     if (move_uploaded_file($upload['tmp_name'], $cilCesta)) {
-                        $nova = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
-                                 'datum1' => $datum1, 'datum2' => $datum2];
+                        $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
+                                    'datum_expirace' => $datum_expirace, 'pinnováno' => $pinnováno];
                         $ohlasky = nactiJson(OHLASKY_JSON);
-                        $archiv  = nactiJson(OHLASKY_ARCHIV_JSON);
-                        array_unshift($ohlasky, $nova);
-                        // Přesunout přebývající do archivu
-                        while (count($ohlasky) > MAX_OHLASKY) {
-                            $nejstarsi = array_pop($ohlasky);
-                            array_unshift($archiv, $nejstarsi);
+                        if ($pinnováno) {
+                            array_unshift($ohlasky, $nova);
+                        } else {
+                            $prvni_nepinnovaný = count(array_filter($ohlasky, fn($o) => !empty($o['pinnováno'])));
+                            array_splice($ohlasky, $prvni_nepinnovaný, 0, [$nova]);
                         }
                         ulozJson(OHLASKY_JSON, $ohlasky);
-                        ulozJson(OHLASKY_ARCHIV_JSON, $archiv);
                         $zprava = 'Ohlášky „' . h($nazev) . '" byly přidány.';
                         $zprava_typ = 'ok';
                     } else {
@@ -214,6 +233,22 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 $zprava = 'Ohlášky byly přesunuty do archivu.';
                 $zprava_typ = 'ok';
             }
+        }
+
+        /* Přepnout připnutí */
+        if ($akce === 'pinovat' && !empty($_POST['soubor'])) {
+            $soubor  = basename($_POST['soubor']);
+            $ohlasky = nactiJson(OHLASKY_JSON);
+            foreach ($ohlasky as &$o) {
+                if ($o['soubor'] === $soubor) {
+                    $o['pinnováno'] = !($o['pinnováno'] ?? false);
+                    break;
+                }
+            }
+            unset($o);
+            usort($ohlasky, fn($a, $b) => ($b['pinnováno'] ?? false) <=> ($a['pinnováno'] ?? false));
+            ulozJson(OHLASKY_JSON, $ohlasky);
+            $zprava = 'Připnutí bylo změněno.'; $zprava_typ = 'ok';
         }
 
         /* Smazat ohlášky (z aktuálních) */
@@ -734,6 +769,11 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
   .btn-smazat:hover { background: #fdf0ee; }
   .btn-archivovat { background: none; border: 1px solid #b8d4be; color: var(--green); padding: 0.35rem 0.75rem; font-size: 0.82rem; border-radius: 5px; cursor: pointer; transition: background 0.15s; }
   .btn-archivovat:hover { background: #eaf6f0; }
+  .btn-pin { background: none; border: 1px solid #d4c8a8; color: #a07838; padding: 0.35rem 0.6rem; font-size: 0.82rem; border-radius: 5px; cursor: pointer; transition: background 0.15s; }
+  .btn-pin:hover { background: #f5f0e0; }
+  .btn-pin.active { background: #f5f0e0; border-color: #a07838; font-weight: 700; }
+  .ohlaska-row--pinned { border-color: rgba(160,120,56,0.4); background: #fdf9f0; }
+  .btn-smazat-prilohu { background: none; border: none; color: #c0392b; font-size: 0.8rem; cursor: pointer; padding: 0.2rem 0.4rem; margin-top: 0.3rem; text-decoration: underline; }
   .btn-odhlasit { background: none; border: 1px solid rgba(255,255,255,0.25); color: #ccc; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 5px; text-decoration: none; transition: background 0.15s; }
   .btn-odhlasit:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
@@ -933,12 +973,12 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="datum1">Datum – řádek 1</label>
-            <input type="text" id="datum1" name="datum1" placeholder="3. neděle velikonoční" required>
+            <label for="datum_expirace">Platí do (datum expirace)</label>
+            <input type="date" id="datum_expirace" name="datum_expirace" required>
           </div>
-          <div class="form-group">
-            <label for="datum2">Datum – řádek 2</label>
-            <input type="text" id="datum2" name="datum2" placeholder="2026 · cyklus A">
+          <div class="form-group" style="display:flex;align-items:center;gap:0.6rem;padding-top:1.6rem;">
+            <input type="checkbox" id="pinnováno" name="pinnováno" value="1" style="width:1.1rem;height:1.1rem;cursor:pointer;">
+            <label for="pinnováno" style="margin:0;cursor:pointer;font-size:0.88rem;">Připnout na první pozici</label>
           </div>
         </div>
         <div class="form-group">
@@ -949,6 +989,7 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
             <p class="upload-text">Přetáhněte nebo <strong>klikněte pro výběr</strong></p>
             <p class="upload-nazev" id="nazevOhlasky"></p>
           </div>
+          <button type="button" class="btn-smazat-prilohu" id="clearOhlasky" style="display:none">× Odebrat soubor</button>
         </div>
         <button type="submit" class="btn btn-gold btn-full">Přidat ohlášky</button>
       </form>
@@ -961,21 +1002,33 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
 
   <div>
     <div class="card">
-      <p class="card-title">Aktuální ohlášky (<?= count($ohlasky) ?> / <?= MAX_OHLASKY ?>)</p>
+      <p class="card-title">Aktuální ohlášky (<?= count($ohlasky) ?>)</p>
       <?php if (empty($ohlasky)): ?>
         <p class="prazdny">Žádné ohlášky.</p>
       <?php else: ?>
         <div class="ohlasky-list">
-          <?php foreach ($ohlasky as $o): ?>
-            <div class="ohlaska-row">
+          <?php foreach ($ohlasky as $o):
+            $je_pinned = !empty($o['pinnováno']);
+            $exp_text  = !empty($o['datum_expirace'])
+                ? 'platí do ' . date('j. n. Y', strtotime($o['datum_expirace']))
+                : ((!empty($o['datum1']) ? $o['datum1'] : '') . (!empty($o['datum2']) ? ' · ' . $o['datum2'] : ''));
+          ?>
+            <div class="ohlaska-row <?= $je_pinned ? 'ohlaska-row--pinned' : '' ?>">
               <div class="ohlaska-row-info">
-                <div class="ohlaska-row-nazev"><?= h($o['nazev']) ?></div>
-                <div class="ohlaska-row-datum"><?= h($o['datum1']) ?><?= !empty($o['datum2']) ? ' · ' . h($o['datum2']) : '' ?></div>
+                <div class="ohlaska-row-nazev">
+                  <?= $je_pinned ? '📌 ' : '' ?><?= h($o['nazev']) ?>
+                </div>
+                <div class="ohlaska-row-datum"><?= h($exp_text) ?></div>
                 <div class="ohlaska-row-soubor">
                   <a href="../ohlasky/<?= h(rawurlencode($o['soubor'])) ?>" target="_blank" style="color:var(--gold)">📄 <?= h($o['soubor']) ?></a>
                 </div>
               </div>
               <div class="ohlaska-row-akce">
+                <form method="post" action="index.php?sekce=ohlasky">
+                  <input type="hidden" name="akce" value="pinovat">
+                  <input type="hidden" name="soubor" value="<?= h($o['soubor']) ?>">
+                  <button type="submit" class="btn-pin <?= $je_pinned ? 'active' : '' ?>" title="<?= $je_pinned ? 'Odepnout' : 'Připnout' ?>">📌</button>
+                </form>
                 <form method="post" action="index.php?sekce=ohlasky"
                       onsubmit="return confirm('Archivovat tyto ohlášky?')">
                   <input type="hidden" name="akce" value="archivovat">
@@ -997,11 +1050,15 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
       <?php if (!empty($archiv)): ?>
         <p class="sekce-sekce-title">Archiv <span class="archiv-badge"><?= count($archiv) ?></span></p>
         <div class="ohlasky-list">
-          <?php foreach ($archiv as $o): ?>
+          <?php foreach ($archiv as $o):
+            $arch_text = !empty($o['datum_expirace'])
+                ? 'platí do ' . date('j. n. Y', strtotime($o['datum_expirace']))
+                : ((!empty($o['datum1']) ? $o['datum1'] : '') . (!empty($o['datum2']) ? ' · ' . $o['datum2'] : ''));
+          ?>
             <div class="ohlaska-row" style="background:#f5f2ed;opacity:0.85;">
               <div class="ohlaska-row-info">
                 <div class="ohlaska-row-nazev"><?= h($o['nazev']) ?></div>
-                <div class="ohlaska-row-datum"><?= h($o['datum1']) ?><?= !empty($o['datum2']) ? ' · ' . h($o['datum2']) : '' ?></div>
+                <div class="ohlaska-row-datum"><?= h($arch_text) ?></div>
                 <div class="ohlaska-row-soubor">
                   <a href="../ohlasky/<?= h(rawurlencode($o['soubor'])) ?>" target="_blank" style="color:var(--gold)">📄 <?= h($o['soubor']) ?></a>
                 </div>
@@ -1244,20 +1301,30 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
   }
 
   // ── Pomocná funkce pro upload zóny ───────────────────────
-  function nastavUpload(zoneId, inputId, nazevId) {
+  function nastavUpload(zoneId, inputId, nazevId, clearId) {
     var zone   = document.getElementById(zoneId);
     var input  = document.getElementById(inputId);
     var nazev  = document.getElementById(nazevId);
+    var clear  = clearId ? document.getElementById(clearId) : null;
     if (!zone || !input) return;
     input.addEventListener('change', function () {
-      nazev.textContent = this.files[0] ? this.files[0].name : '';
+      var soubor = this.files[0] ? this.files[0].name : '';
+      nazev.textContent = soubor;
+      if (clear) clear.style.display = soubor ? 'inline-block' : 'none';
     });
+    if (clear) {
+      clear.addEventListener('click', function () {
+        input.value = '';
+        nazev.textContent = '';
+        clear.style.display = 'none';
+      });
+    }
     zone.addEventListener('dragover', function (e) { e.preventDefault(); zone.classList.add('dragover'); });
     zone.addEventListener('dragleave', function ()  { zone.classList.remove('dragover'); });
     zone.addEventListener('drop',      function ()  { zone.classList.remove('dragover'); });
   }
   nastavUpload('uploadZoneNastenka', 'souborNastenka', 'nazevNastenka');
-  nastavUpload('uploadZoneOhlasky',  'souborOhlasky',  'nazevOhlasky');
+  nastavUpload('uploadZoneOhlasky',  'souborOhlasky',  'nazevOhlasky', 'clearOhlasky');
   nastavUpload('uploadZoneAkt',      'souborAkt',      'nazevAkt');
   nastavUpload('uploadZonePriloha',  'souborPriloha',  'nazevPriloha');
 }());

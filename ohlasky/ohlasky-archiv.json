@@ -2,19 +2,16 @@
   {
     "soubor": "svaty-tyden-26.pdf",
     "nazev": "Ohlášky – Svatý týden",
-    "datum1": "Svatý týden",
-    "datum2": "2026"
+    "datum_expirace": "2026-04-13"
   },
   {
     "soubor": "5-nedele-postni-26-A.pdf",
     "nazev": "Ohlášky – 5. neděle postní",
-    "datum1": "5. neděle postní",
-    "datum2": "2026 · cyklus A"
+    "datum_expirace": "2026-04-05"
   },
   {
     "soubor": "4-nedele-postni-25-A.pdf",
     "nazev": "Ohlášky – 4. neděle postní",
-    "datum1": "4. neděle postní",
-    "datum2": "2025 · cyklus A"
+    "datum_expirace": "2025-03-30"
   }
 ]

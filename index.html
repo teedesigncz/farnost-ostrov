@@ -1242,8 +1242,15 @@
           var html = '';
           data.forEach(function (o) {
             var href = 'ohlasky/' + encodeURIComponent(o.soubor);
+            var datumText = '';
+            if (o.datum_expirace) {
+              var d = new Date(o.datum_expirace);
+              datumText = 'platí do ' + d.getDate() + '. ' + (d.getMonth() + 1) + '. ' + d.getFullYear();
+            } else if (o.datum1) {
+              datumText = esc(o.datum1) + (o.datum2 ? '<br>' + esc(o.datum2) : '');
+            }
             html += '<div class="ohlaska-item">';
-            html += '<div class="ohlaska-datum">' + esc(o.datum1) + (o.datum2 ? '<br>' + esc(o.datum2) : '') + '</div>';
+            html += '<div class="ohlaska-datum">' + datumText + '</div>';
             html += '<div class="ohlaska-text">';
             html += '<strong>' + esc(o.nazev) + '</strong>';
             html += '<a href="' + href + '" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>';
