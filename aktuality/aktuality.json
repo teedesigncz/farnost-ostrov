@@ -1,0 +1,52 @@
+[
+  {
+    "soubor": "aktualita-pavel-fort-odchod.html",
+    "nazev": "Odchod P. Pavla Fořta z kněžské služby",
+    "perex": "P. Pavel Fořt byl biskupem Tomášem Holubem odvolán z kněžské služby ve farnosti Ostrov.",
+    "kategorie": "Oznámení farnosti",
+    "datum": "10. dubna 2026",
+    "hero_img": "aktuality/knez-pavel-fort.webp",
+    "hero_alt": "P. Pavel Fořt",
+    "generovano": false
+  },
+  {
+    "soubor": "aktualita-zehnani-pokrmu.html",
+    "nazev": "Žehnání pokrmů",
+    "perex": "Tradiční součást oslav Zmrtvýchvstání Páně. Přineste své dary na připravený stoleček v přední části kostela — žehnání proběhne v závěru slavnostní mše.",
+    "kategorie": "Velikonoce 2026",
+    "datum": "Slavnost Zmrtvýchvstání Páně · 5. dubna 2026",
+    "hero_img": "ohlasky/zehnani-pokrmu.webp",
+    "hero_alt": "Žehnání pokrmů",
+    "generovano": false
+  },
+  {
+    "soubor": "aktualita-krizova-cesta-farnosti.html",
+    "nazev": "Modlitba za Ostrov",
+    "perex": "Pěší putování pro požehnání všem obyvatelům Ostrovska — 26 km s modlitbou na vybraných místech města i okolí.",
+    "kategorie": "Aktualita",
+    "datum": "Sobota 4. dubna 2026 · 9:00",
+    "hero_img": "aktuality/ostrov-ruda-vez-smrti.webp",
+    "hero_alt": "Modlitba za Ostrov – Rudá věž smrti",
+    "generovano": false
+  },
+  {
+    "soubor": "aktualita-velikonoce-2026.html",
+    "nazev": "Velikonoční pořad bohoslužeb",
+    "perex": "Přehled velikonočních bohoslužeb ve farnosti Ostrov 2026 – Zelený čtvrtek, Velký pátek, Bílá sobota a Velikonoční neděle.",
+    "kategorie": "Velikonoce 2026",
+    "datum": "Svatý týden · 30. března – 5. dubna 2026",
+    "hero_img": "img/velikonoce.webp",
+    "hero_alt": "Velikonoce 2026",
+    "generovano": false
+  },
+  {
+    "soubor": "aktualita-serova-vecere.html",
+    "nazev": "Sederová večeře",
+    "perex": "Tradiční sederová večeře na faře v předvečer Velkého pátku — přihlášení nutné předem.",
+    "kategorie": "Velikonoce 2026",
+    "datum": "Zelený čtvrtek · 2. dubna 2026",
+    "hero_img": "ohlasky/zehnani-pokrmu.webp",
+    "hero_alt": "Sederová večeře",
+    "generovano": false
+  }
+]

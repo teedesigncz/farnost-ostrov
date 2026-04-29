@@ -238,6 +238,70 @@ nav {
   margin-bottom: 0.5rem;
 }
 
+/* Fotka osoby v příspěvku */
+.prispevek-foto-osoby {
+  display: block;
+  width: 180px;
+  max-width: 100%;
+  border-radius: 4px;
+  float: right;
+  margin: 0 0 1.5rem 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+@media (max-width: 500px) {
+  .prispevek-foto-osoby {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+/* Příloha PDF */
+.prispevek-priloha {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.8rem;
+  padding: 1rem 1.6rem 1rem 1.2rem;
+  border: 1px solid rgba(155, 109, 212, 0.3) !important;
+  background: rgba(155, 109, 212, 0.06);
+  border-radius: 4px;
+  color: var(--cream) !important;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+}
+.prispevek-priloha svg {
+  stroke: #a78bfa;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  transition: stroke 0.25s;
+}
+.prispevek-priloha::after {
+  content: 'PDF';
+  margin-left: auto;
+  padding-left: 1.2rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: #a78bfa;
+  opacity: 0.7;
+  transition: opacity 0.25s;
+}
+.prispevek-priloha:hover {
+  background: rgba(155, 109, 212, 0.13) !important;
+  border-color: rgba(155, 109, 212, 0.65) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(155, 109, 212, 0.18);
+}
+.prispevek-priloha:hover svg { stroke: #c4b5fd; }
+.prispevek-priloha:hover::after { opacity: 1; }
+
 /* ── VELIKONOČNÍ POŘAD ── */
 .vel-section-title {
   font-family: 'Cinzel', serif;

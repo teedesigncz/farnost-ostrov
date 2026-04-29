@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Archiv ohlášek farnosti Ostrov.">
+<title>Archiv ohlášek – Farnost Ostrov</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YC8PFWZWHN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YC8PFWZWHN');
+</script>
+<link rel="icon" type="image/png" href="img/darnost-favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .ohlasy {
+    background: var(--dark);
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(201,146,42,0.12);
+  }
+  .ohlasy-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ohlasy-content {
+    margin-top: 3rem;
+    text-align: left;
+  }
+  .ohlaska-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .ohlaska-item {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid rgba(201,146,42,0.15);
+    background: var(--dark-mid);
+    align-items: start;
+  }
+  .ohlaska-item:hover {
+    border-color: rgba(201,146,42,0.35);
+    background: rgba(201,146,42,0.04);
+  }
+  .ohlaska-datum {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    line-height: 1.6;
+    padding-top: 0.15rem;
+    border-right: 1px solid rgba(201,146,42,0.2);
+    padding-right: 1.5rem;
+  }
+  .ohlaska-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--cream);
+  }
+  .ohlaska-text strong {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  @media (max-width: 700px) {
+    .ohlaska-item { grid-template-columns: 1fr; }
+    .ohlaska-datum { border-right: none; border-bottom: 1px solid rgba(201,146,42,0.2); padding-right: 0; padding-bottom: 0.6rem; }
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.farnostostrov.cz/ohlasky-archiv-2026.html">
+<meta property="og:site_name" content="Farnost Ostrov">
+<meta property="og:title" content="Archiv ohlášek – Farnost Ostrov">
+<meta property="og:description" content="Archiv ohlášek farnosti Ostrov.">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" style="display:flex;align-items:center;gap:0.7rem;">
+    <img src="img/erb-farnosti.png" alt="Erb farnosti" style="height:42px;width:auto;opacity:0.95;">
+    <span style="display:flex;align-items:center;gap:0.4rem;">Farnost Ostrov</span>
+  </a>
+  <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')" id="nav-toggle">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="o-farnosti.html">O farnosti</a></li>
+    <li><a href="index.html#aktuality">Aktuality</a></li>
+    <li><a href="index.html#ohlasky">Ohlášky</a></li>
+    <li><a href="index.html#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="zivotni-situace.html">Životní situace</a></li>
+    <li><a href="index.html#kontakty">Kontakty</a></li>
+  </ul>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+</nav>
+
+<!-- OBSAH -->
+<section class="ohlasy" style="padding-top:6rem;">
+  <div class="ohlasy-inner">
+    <p class="section-label">Farní život</p>
+    <h1 class="section-title">Archiv ohlášek</h1>
+    <div class="ornament">
+      <span class="ornament-line"></span>
+      <span class="ornament-cross">✦</span>
+      <span class="ornament-line rev"></span>
+    </div>
+    <div class="ohlasy-content">
+      <div class="ohlaska-list" id="archiv-list">
+        <p style="color:rgba(255,255,255,0.3);text-align:center;padding:2rem 0;font-size:0.9rem;">Načítání&hellip;</p>
+      </div>
+
+      <div style="text-align:right;margin-top:2.5rem;">
+        <a href="index.html#ohlasky" style="font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.35);">
+          &larr; Zpět na aktuální ohlášky
+        </a>
+      </div>
+    </div>
+    <script>
+    (function () {
+      function esc(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+      fetch('ohlasky/ohlasky-archiv.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var list = document.getElementById('archiv-list');
+          if (!Array.isArray(data) || data.length === 0) {
+            list.innerHTML = '<p style="color:rgba(255,255,255,0.3);text-align:center;padding:2rem 0;font-size:0.9rem;">Archiv je prázdný.</p>';
+            return;
+          }
+          var html = '';
+          data.forEach(function (o) {
+            var href = 'ohlasky/' + encodeURIComponent(o.soubor);
+            html += '<div class="ohlaska-item">';
+            html += '<div class="ohlaska-datum">' + esc(o.datum1) + (o.datum2 ? '<br>' + esc(o.datum2) : '') + '</div>';
+            html += '<div class="ohlaska-text">';
+            html += '<strong>' + esc(o.nazev) + '</strong>';
+            html += '<a href="' + href + '" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>';
+            html += '</div></div>';
+          });
+          list.innerHTML = html;
+        })
+        .catch(function () {
+          document.getElementById('archiv-list').innerHTML = '<p style="color:rgba(255,255,255,0.3);text-align:center;padding:2rem 0;">Archiv se nepodařilo načíst.</p>';
+        });
+    }());
+    </script>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="footer.js"></script>
+
+</body>
+</html>

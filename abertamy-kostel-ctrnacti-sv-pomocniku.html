@@ -35,10 +35,10 @@
   </button>
   <ul class="nav-links" id="nav-links">
     <li><a href="o-farnosti.html">O farnosti</a></li>
-    <li><a href="zivotni-situace.html">Životní situace</a></li>
     <li><a href="index.html#aktuality">Aktuality</a></li>
     <li><a href="index.html#ohlasky">Ohlášky</a></li>
     <li><a href="index.html#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="zivotni-situace.html">Životní situace</a></li>
     <li><a href="index.html#kontakty">Kontakty</a></li>
   </ul>
   <script>
@@ -105,96 +105,14 @@
         <li><a href="krasny-les-kostel-sv-petra-a-pavla.html" class="zs-sit-sidebar-link">Krásný Les – kostel sv. Petra a Pavla</a></li>
         <li><a href="radosov-kostel-sv-vaclava.html" class="zs-sit-sidebar-link">Radošov – kostel sv. Václava</a></li>
         <li><a href="straz-nad-ohri-kostel-sv-michaela.html" class="zs-sit-sidebar-link">Stráž nad Ohří – kostel sv. Michaela</a></li>
+        <li><a href="hroznetin-kostel-sv-petra-a-pavla.html" class="zs-sit-sidebar-link">Hroznětín – kostel sv. Petra a Pavla</a></li>
       </ul>
     </aside>
 
   </div>
 </article>
 
-<!-- FOOTER -->
-<footer id="kontakty">
-  <div class="footer-grid">
-    <div>
-      <p class="footer-col-title">Farnost</p>
-      <div class="footer-address">
-        Římskokatolická farnost Ostrov<br>
-        Malé náměstí 25<br>
-        363 01 Ostrov<br><br>
-        <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
-        <a href="tel:+420604835064">+420 604 835 064</a><br><br>
-        Číslo účtu: 801809379/0800
-      </div>
-    </div>
-    <div>
-      <p class="footer-col-title">Kontaktní osoby</p>
-      <div class="footer-person">
-        <div class="footer-person-name">Milan Geiger</div>
-        <div class="footer-person-detail">
-          <a href="mailto:geiger@bip.cz">geiger@bip.cz</a><br>
-          <a href="tel:+420731697408">+420 731 697 408</a>
-        </div>
-      </div>
-      <div class="footer-person">
-        <div class="footer-person-name">Pavel Fořt</div>
-        <div class="footer-person-detail">
-          <a href="mailto:pavel.fort@bip.cz">pavel.fort@bip.cz</a><br>
-          <a href="tel:+420737546649">+420 737 546 649</a>
-        </div>
-      </div>
-      <div class="footer-person" style="margin-top:1.2rem; padding-top:1rem; border-top:1px solid rgba(201,146,42,0.2);">
-        <div class="footer-person-name" style="letter-spacing:0.18em; font-size:0.72rem; color:var(--gold);">Kancelář</div>
-        <div class="footer-person-detail">
-          <a href="mailto:farnost.ostrov@bip.cz">farnost.ostrov@bip.cz</a><br>
-          <a href="tel:+420604835064">+420 604 835 064</a>
-        </div>
-      </div>
-    </div>
-    <div>
-      <p class="footer-col-title">Zůstaňte v kontaktu</p>
-      <p style="font-size:0.85rem;color:rgba(245,228,176,0.6);margin:0 0 1rem;">Zanechte nám svůj kontakt a budeme vás informovat o dění ve farnosti.</p>
-      <form class="footer-form" id="footer-contact-form">
-        <input type="hidden" name="access_key" value="16374971-e3b5-49fe-bbec-5cff6190f678">
-        <input type="hidden" name="subject" value="Nový kontakt z webu farnosti Ostrov">
-        <input type="text" name="name" placeholder="Vaše jméno" required>
-        <input type="email" name="email" placeholder="Váš e-mail" required>
-        <button type="submit">Přihlásit se</button>
-        <p class="footer-form-success" id="fc-success">✓ &nbsp;Děkujeme, kontakt byl uložen.</p>
-      </form>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-logo">Farnost Ostrov ✝</div>
-    <div class="footer-copy">© 2026 Římskokatolická farnost Ostrov &nbsp;·&nbsp; Biskupství Plzeňské</div>
-  </div>
-  <div style="text-align:center;padding-top:1rem;font-family:'EB Garamond',serif;font-size:0.75rem;font-style:italic;color:rgba(249,243,227,0.25);">Autor: TEE Design CZ – vibe4you</div>
-</footer>
-
-<script>
-  document.getElementById('footer-contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    btn.textContent = 'Odesílám…';
-    btn.disabled = true;
-    const payload = {
-      access_key: '16374971-e3b5-49fe-bbec-5cff6190f678',
-      subject: 'Nový kontakt z webu farnosti Ostrov',
-      name: this.querySelector('[name="name"]').value,
-      email: this.querySelector('[name="email"]').value
-    };
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if ((await res.json()).success) {
-        document.getElementById('fc-success').style.display = 'block';
-        this.reset();
-      }
-    } catch (err) {}
-    btn.textContent = 'Přihlásit se';
-    btn.disabled = false;
-  });
-</script>
+<div id="site-footer"></div>
+<script src="footer.js"></script>
 </body>
 </html>

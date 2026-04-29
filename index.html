@@ -782,9 +782,12 @@
   .aktuality-karta--brzy { opacity: 0.55; }
   .aktuality-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 3rem;
+  }
+  @media (max-width: 860px) {
+    .aktuality-grid { grid-template-columns: 1fr; }
   }
   .aktuality-karta {
     background: var(--dark-mid);
@@ -1002,11 +1005,11 @@
   </button>
   <ul class="nav-links" id="nav-links">
     <li><a href="o-farnosti.html">O farnosti</a></li>
-    <li><a href="zivotni-situace.html">Životní situace</a></li>
     <li><a href="#aktuality">Aktuality</a></li>
     <li><a href="#akce">Akce</a></li>
     <li><a href="#ohlasky">Ohlášky</a></li>
     <li><a href="#bohosluzby">Pořad bohoslužeb</a></li>
+    <li><a href="zivotni-situace.html">Životní situace</a></li>
     <li><a href="#kontakty">Kontakty</a></li>
   </ul>
   <script>
@@ -1062,45 +1065,49 @@
     <div class="ohlasy-content">
 
 
-      <div class="aktuality-grid">
-
-        <a href="aktualita-zehnani-pokrmu.html" class="aktuality-karta-odkaz">
-          <div class="aktuality-karta">
-            <img src="ohlasky/zehnani-pokrmu.webp" alt="Žehnání pokrmů" class="aktuality-karta-img">
-            <div class="aktuality-karta-body">
-              <p class="aktuality-karta-meta">Slavnost Zmrtvýchvstání Páně · 5. dubna 2026</p>
-              <h3 class="aktuality-karta-title">Žehnání pokrmů</h3>
-              <p class="aktuality-karta-perex">Tradiční součást oslav Zmrtvýchvstání Páně. Přineste své dary na připravený stoleček v přední části kostela — žehnání proběhne v závěru slavnostní mše.</p>
-            </div>
-          </div>
+      <div class="aktuality-grid" id="aktuality-grid">
+        <!-- Načítání z aktuality/aktuality.json -->
+      </div>
+      <div style="text-align:right;margin-top:2rem;">
+        <a href="aktuality.html" style="font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.35);">
+          Všechny aktuality &rarr;
         </a>
-
-        <a href="aktualita-krizova-cesta-farnosti.html" class="aktuality-karta-odkaz">
-          <div class="aktuality-karta">
-            <img src="aktuality/ostrov-ruda-vez-smrti.webp" alt="Modlitba za Ostrov – pěší pouť" class="aktuality-karta-img">
-            <div class="aktuality-karta-body">
-              <p class="aktuality-karta-meta">Sobota 4. dubna 2026 · 9:00</p>
-              <h3 class="aktuality-karta-title">Modlitba za Ostrov</h3>
-              <p class="aktuality-karta-perex">Pěší putování pro požehnání všem obyvatelům Ostrovska — 26 km s modlitbou na vybraných místech města i okolí.</p>
-            </div>
-          </div>
-        </a>
-
-        <a href="aktualita-velikonoce-2026.html" class="aktuality-karta-odkaz">
-          <div class="aktuality-karta">
-            <img src="img/velikonoce.webp" alt="Velikonoční pořad bohoslužeb" class="aktuality-karta-img">
-            <div class="aktuality-karta-body">
-              <p class="aktuality-karta-meta">Velikonoce 2026</p>
-              <h3 class="aktuality-karta-title">Velikonoční pořad bohoslužeb</h3>
-              <p class="aktuality-karta-perex">Pořad bohoslužeb během Svatého týdne a Velikonočního tridua — Zelený čtvrtek, Velký pátek, Vigilie a Neděle Zmrtvýchvstání.</p>
-            </div>
-          </div>
-        </a>
-
       </div>
     </div>
   </div>
 </section>
+<script>
+(function () {
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  fetch('aktuality/aktuality.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var grid = document.getElementById('aktuality-grid');
+      if (!Array.isArray(data) || data.length === 0) {
+        grid.innerHTML = '';
+        return;
+      }
+      var items = data.slice(0, 3);
+      var html  = '';
+      items.forEach(function (a) {
+        html += '<a href="' + esc(a.soubor) + '" class="aktuality-karta-odkaz">';
+        html += '<div class="aktuality-karta">';
+        html += '<img src="' + esc(a.hero_img) + '" alt="' + esc(a.hero_alt) + '" class="aktuality-karta-img" loading="lazy">';
+        html += '<div class="aktuality-karta-body">';
+        html += '<p class="aktuality-karta-meta">' + esc(a.kategorie) + ' · ' + esc(a.datum) + '</p>';
+        html += '<h3 class="aktuality-karta-title">' + esc(a.nazev) + '</h3>';
+        html += '<p class="aktuality-karta-perex">' + esc(a.perex) + '</p>';
+        html += '</div></div></a>';
+      });
+      grid.innerHTML = html;
+    })
+    .catch(function () {
+      document.getElementById('aktuality-grid').innerHTML = '';
+    });
+}());
+</script>
 
 <!-- AKCE / NÁSTĚNKA -->
 <section class="ohlasy" id="akce">
@@ -1210,32 +1217,45 @@
       <span class="ornament-line rev"></span>
     </div>
     <div class="ohlasy-content">
-      <div class="ohlaska-list">
-
-        <div class="ohlaska-item">
-          <div class="ohlaska-datum">2. neděle velikonoční<br>2026 · cyklus A</div>
-          <div class="ohlaska-text">
-            <strong>Ohlášky – 2. neděle velikonoční</strong>
-            <a href="ohlasky/ohlasky-2-nedele-velikonoce-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
-          </div>
-        </div>
-
-        <div class="ohlaska-item">
-          <div class="ohlaska-datum">1. neděle velikonoční<br>2026 · cyklus A</div>
-          <div class="ohlaska-text">
-            <strong>Ohlášky – 1. neděle velikonoční</strong>
-            <a href="ohlasky/ohlasky´-1-nedele-velikonocni-26.pdf" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>
-          </div>
-        </div>
-
-
+      <div class="ohlaska-list" id="ohlasky-list">
+        <p style="color:rgba(255,255,255,0.3);text-align:center;padding:2rem 0;font-size:0.9rem;">Načítání&hellip;</p>
       </div>
       <div style="text-align:right;margin-top:2rem;">
         <a href="ohlasky-archiv-2026.html" style="font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.2em;color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.35);">
-          Archiv ohlášek 2026 &rarr;
+          Archiv ohlášek &rarr;
         </a>
       </div>
     </div>
+    <script>
+    (function () {
+      function esc(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+      fetch('ohlasky/ohlasky.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var list = document.getElementById('ohlasky-list');
+          if (!Array.isArray(data) || data.length === 0) {
+            list.innerHTML = '<p style="color:rgba(255,255,255,0.3);text-align:center;padding:2rem 0;font-size:0.9rem;">Momentálně nejsou k&nbsp;dispozici žádné ohlášky.</p>';
+            return;
+          }
+          var html = '';
+          data.forEach(function (o) {
+            var href = 'ohlasky/' + encodeURIComponent(o.soubor);
+            html += '<div class="ohlaska-item">';
+            html += '<div class="ohlaska-datum">' + esc(o.datum1) + (o.datum2 ? '<br>' + esc(o.datum2) : '') + '</div>';
+            html += '<div class="ohlaska-text">';
+            html += '<strong>' + esc(o.nazev) + '</strong>';
+            html += '<a href="' + href + '" target="_blank" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,146,42,0.4);">Zobrazit ohlášky (.pdf) &rarr;</a>';
+            html += '</div></div>';
+          });
+          list.innerHTML = html;
+        })
+        .catch(function () {
+          document.getElementById('ohlasky-list').innerHTML = '';
+        });
+    }());
+    </script>
   </div>
 </section>
 
