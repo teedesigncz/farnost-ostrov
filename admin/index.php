@@ -172,20 +172,24 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
             $pinnováno      = !empty($_POST['pinnováno']);
             $upload         = $_FILES['soubor'] ?? null;
 
+            $maUpload = $upload && $upload['error'] !== UPLOAD_ERR_NO_FILE;
+
             if (empty($nazev) || empty($datum_expirace)) {
                 $zprava = 'Zadejte název a datum expirace ohlášek.'; $zprava_typ = 'chyba';
-            } elseif (!$upload || $upload['error'] !== UPLOAD_ERR_OK) {
+            } elseif ($maUpload && $upload['error'] !== UPLOAD_ERR_OK) {
                 $kody = [UPLOAD_ERR_INI_SIZE => 'Soubor je příliš velký (limit serveru).',
-                         UPLOAD_ERR_FORM_SIZE => 'Soubor je příliš velký.',
-                         UPLOAD_ERR_NO_FILE   => 'Nebyl vybrán žádný soubor.'];
-                $zprava = $kody[$upload['error'] ?? 0] ?? 'Chyba při nahrávání souboru.';
+                         UPLOAD_ERR_FORM_SIZE => 'Soubor je příliš velký.'];
+                $zprava = $kody[$upload['error']] ?? 'Chyba při nahrávání souboru.';
                 $zprava_typ = 'chyba';
             } else {
-                $mime    = mime_content_type($upload['tmp_name']);
-                $pripona = strtolower(pathinfo($upload['name'], PATHINFO_EXTENSION));
-                if ($mime !== 'application/pdf' || $pripona !== 'pdf') {
-                    $zprava = 'Ohlášky musí být ve formátu PDF.'; $zprava_typ = 'chyba';
-                } else {
+                $nazevSouboru = '';
+                if ($maUpload) {
+                    $mime    = mime_content_type($upload['tmp_name']);
+                    $pripona = strtolower(pathinfo($upload['name'], PATHINFO_EXTENSION));
+                    if ($mime !== 'application/pdf' || $pripona !== 'pdf') {
+                        $zprava = 'Ohlášky musí být ve formátu PDF.'; $zprava_typ = 'chyba';
+                        goto konec_pridat;
+                    }
                     $zaklad = sanitizujSoubor(pathinfo($upload['name'], PATHINFO_FILENAME));
                     if (empty($zaklad)) $zaklad = 'ohlasky';
                     $nazevSouboru = $zaklad . '.pdf';
@@ -196,26 +200,27 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                         $cilCesta     = OHLASKY_ADRESAR . $nazevSouboru;
                         $i++;
                     }
-                    if (move_uploaded_file($upload['tmp_name'], $cilCesta)) {
-                        $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
-                                    'poznamka' => $poznamka, 'datum_expirace' => $datum_expirace,
-                                    'pinnováno' => $pinnováno];
-                        $ohlasky = nactiJson(OHLASKY_JSON);
-                        if ($pinnováno) {
-                            array_unshift($ohlasky, $nova);
-                        } else {
-                            $prvni_nepinnovaný = count(array_filter($ohlasky, fn($o) => !empty($o['pinnováno'])));
-                            array_splice($ohlasky, $prvni_nepinnovaný, 0, [$nova]);
-                        }
-                        ulozJson(OHLASKY_JSON, $ohlasky);
-                        $zprava = 'Ohlášky „' . h($nazev) . '" byly přidány.';
-                        $zprava_typ = 'ok';
-                    } else {
+                    if (!move_uploaded_file($upload['tmp_name'], $cilCesta)) {
                         $zprava = 'Soubor se nepodařilo uložit. Zkontrolujte práva ke složce ohlasky/.';
                         $zprava_typ = 'chyba';
+                        goto konec_pridat;
                     }
                 }
+                $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
+                            'poznamka' => $poznamka, 'datum_expirace' => $datum_expirace,
+                            'pinnováno' => $pinnováno];
+                $ohlasky = nactiJson(OHLASKY_JSON);
+                if ($pinnováno) {
+                    array_unshift($ohlasky, $nova);
+                } else {
+                    $prvni_nepinnovaný = count(array_filter($ohlasky, fn($o) => !empty($o['pinnováno'])));
+                    array_splice($ohlasky, $prvni_nepinnovaný, 0, [$nova]);
+                }
+                ulozJson(OHLASKY_JSON, $ohlasky);
+                $zprava = 'Ohlášky „' . h($nazev) . '" byly přidány.';
+                $zprava_typ = 'ok';
             }
+            konec_pridat:
         }
 
         /* Archivovat ohlášky (přesun bez smazání souboru) */
@@ -990,7 +995,7 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
         <div class="form-group">
           <label>Soubor PDF</label>
           <div class="upload-zone" id="uploadZoneOhlasky">
-            <input type="file" name="soubor" id="souborOhlasky" accept=".pdf" required>
+            <input type="file" name="soubor" id="souborOhlasky" accept=".pdf">
             <span class="upload-icon">📄</span>
             <p class="upload-text">Přetáhněte nebo <strong>klikněte pro výběr</strong></p>
             <p class="upload-nazev" id="nazevOhlasky"></p>
