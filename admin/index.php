@@ -143,14 +143,15 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
     if ($sekce === 'ohlasky') {
 
-        /* Auto-archivace ohlášek s prošlým datem expirace */
+        /* Auto-archivace ohlášek s prošlým datem archivu */
         {
             $dnes_datum   = date('Y-m-d');
             $ohlasky_auto = nactiJson(OHLASKY_JSON);
             $archiv_auto  = nactiJson(OHLASKY_ARCHIV_JSON);
             $auto_zmeneno = false;
             $ohlasky_auto = array_filter($ohlasky_auto, function ($o) use ($dnes_datum, &$archiv_auto, &$auto_zmeneno) {
-                if (!empty($o['datum_expirace']) && $o['datum_expirace'] < $dnes_datum) {
+                $datum_arch = $o['datum_archiv'] ?? $o['datum_expirace'] ?? '';
+                if (!empty($datum_arch) && $datum_arch < $dnes_datum) {
                     unset($o['pinnováno']);
                     array_unshift($archiv_auto, $o);
                     $auto_zmeneno = true;
@@ -166,17 +167,19 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         /* Přidat ohlášky */
         if ($akce === 'pridat') {
-            $nazev          = trim($_POST['nazev']          ?? '');
-            $poznamka       = trim($_POST['poznamka']       ?? '');
-            $datum_od       = trim($_POST['datum_od']       ?? '');
-            $datum_expirace = trim($_POST['datum_expirace'] ?? '');
-            $pinnováno      = !empty($_POST['pinnováno']);
-            $upload         = $_FILES['soubor'] ?? null;
+            $nazev         = trim($_POST['nazev']         ?? '');
+            $poznamka      = trim($_POST['poznamka']      ?? '');
+            $datum_od      = trim($_POST['datum_od']      ?? '');
+            $datum_do      = trim($_POST['datum_do']      ?? '');
+            $datum_zobraz  = trim($_POST['datum_zobraz']  ?? '');
+            $datum_archiv  = trim($_POST['datum_archiv']  ?? '');
+            $pinnováno     = !empty($_POST['pinnováno']);
+            $upload        = $_FILES['soubor'] ?? null;
 
             $maUpload = $upload && $upload['error'] !== UPLOAD_ERR_NO_FILE;
 
-            if (empty($nazev) || empty($datum_expirace)) {
-                $zprava = 'Zadejte název a datum expirace ohlášek.'; $zprava_typ = 'chyba';
+            if (empty($nazev) || empty($datum_archiv)) {
+                $zprava = 'Zadejte název a datum archivu.'; $zprava_typ = 'chyba';
             } elseif ($maUpload && $upload['error'] !== UPLOAD_ERR_OK) {
                 $kody = [UPLOAD_ERR_INI_SIZE => 'Soubor je příliš velký (limit serveru).',
                          UPLOAD_ERR_FORM_SIZE => 'Soubor je příliš velký.'];
@@ -209,7 +212,8 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                 }
                 $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
                             'poznamka' => $poznamka, 'datum_od' => $datum_od,
-                            'datum_expirace' => $datum_expirace, 'pinnováno' => $pinnováno];
+                            'datum_do' => $datum_do, 'datum_zobraz' => $datum_zobraz,
+                            'datum_archiv' => $datum_archiv, 'pinnováno' => $pinnováno];
                 $ohlasky = nactiJson(OHLASKY_JSON);
                 if ($pinnováno) {
                     array_unshift($ohlasky, $nova);
@@ -983,19 +987,25 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
           <label for="poznamka">Poznámka k ohlášce</label>
           <input type="text" id="poznamka" name="poznamka" placeholder="např. platí i v pondělí">
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="datum_od">Platí od</label>
-            <input type="date" id="datum_od" name="datum_od">
-          </div>
-          <div class="form-group">
-            <label for="datum_expirace">Platí do</label>
-            <input type="date" id="datum_expirace" name="datum_expirace" required>
-          </div>
-          <div class="form-group" style="display:flex;align-items:center;gap:0.6rem;padding-top:1.6rem;">
-            <input type="checkbox" id="pinnováno" name="pinnováno" value="1" style="width:1.1rem;height:1.1rem;cursor:pointer;">
-            <label for="pinnováno" style="margin:0;cursor:pointer;font-size:0.88rem;">Připnout na první pozici</label>
-          </div>
+        <div class="form-group">
+          <label for="datum_od">Od <small style="color:#aaa;font-weight:400;">(zobrazení za názvem)</small></label>
+          <input type="date" id="datum_od" name="datum_od">
+        </div>
+        <div class="form-group">
+          <label for="datum_do">Do <small style="color:#aaa;font-weight:400;">(zobrazení za názvem)</small></label>
+          <input type="date" id="datum_do" name="datum_do">
+        </div>
+        <div class="form-group">
+          <label for="datum_zobraz">Zobrazit od <small style="color:#aaa;font-weight:400;">(od kdy je ohláška viditelná)</small></label>
+          <input type="date" id="datum_zobraz" name="datum_zobraz">
+        </div>
+        <div class="form-group">
+          <label for="datum_archiv">Archivovat <small style="color:#aaa;font-weight:400;">(datum přesunu do archivu)</small></label>
+          <input type="date" id="datum_archiv" name="datum_archiv" required>
+        </div>
+        <div class="form-group" style="display:flex;align-items:center;gap:0.6rem;">
+          <input type="checkbox" id="pinnováno" name="pinnováno" value="1" style="width:1.1rem;height:1.1rem;cursor:pointer;">
+          <label for="pinnováno" style="margin:0;cursor:pointer;font-size:0.88rem;">Připnout na první pozici</label>
         </div>
         <div class="form-group">
           <label>Soubor PDF</label>
@@ -1024,11 +1034,12 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
       <?php else: ?>
         <div class="ohlasky-list">
           <?php foreach ($ohlasky as $o):
-            $je_pinned = !empty($o['pinnováno']);
-            $od_text   = !empty($o['datum_od'])       ? 'od ' . date('j. n. Y', strtotime($o['datum_od'])) : '';
-            $exp_text  = !empty($o['datum_expirace'])
-                ? 'do ' . date('j. n. Y', strtotime($o['datum_expirace']))
-                : ((!empty($o['datum1']) ? $o['datum1'] : '') . (!empty($o['datum2']) ? ' · ' . $o['datum2'] : ''));
+            $je_pinned     = !empty($o['pinnováno']);
+            $od_text       = !empty($o['datum_od'])     ? 'Od: '      . date('j. n. Y', strtotime($o['datum_od']))     : '';
+            $do_text       = !empty($o['datum_do'])     ? 'Do: '      . date('j. n. Y', strtotime($o['datum_do']))     : '';
+            $zobraz_text   = !empty($o['datum_zobraz']) ? 'Zobrazit: '. date('j. n. Y', strtotime($o['datum_zobraz'])) : '';
+            $arch_datum    = $o['datum_archiv'] ?? $o['datum_expirace'] ?? '';
+            $archiv_text   = !empty($arch_datum)        ? 'Archiv: '  . date('j. n. Y', strtotime($arch_datum))        : '';
           ?>
             <div class="ohlaska-row <?= $je_pinned ? 'ohlaska-row--pinned' : '' ?>">
               <div class="ohlaska-row-info">
@@ -1038,8 +1049,10 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
                 <?php if (!empty($o['poznamka'])): ?>
                   <div class="ohlaska-row-datum" style="font-style:italic;"><?= h($o['poznamka']) ?></div>
                 <?php endif; ?>
-                <?php if ($od_text): ?><div class="ohlaska-row-datum"><?= h($od_text) ?></div><?php endif; ?>
-                <div class="ohlaska-row-datum"><?= h($exp_text) ?></div>
+                <?php if ($od_text):     ?><div class="ohlaska-row-datum"><?= h($od_text)     ?></div><?php endif; ?>
+                <?php if ($do_text):     ?><div class="ohlaska-row-datum"><?= h($do_text)     ?></div><?php endif; ?>
+                <?php if ($zobraz_text): ?><div class="ohlaska-row-datum"><?= h($zobraz_text) ?></div><?php endif; ?>
+                <?php if ($archiv_text): ?><div class="ohlaska-row-datum"><?= h($archiv_text) ?></div><?php endif; ?>
                 <div class="ohlaska-row-soubor">
                   <a href="../ohlasky/<?= h(rawurlencode($o['soubor'])) ?>" target="_blank" style="color:var(--gold)">📄 <?= h($o['soubor']) ?></a>
                 </div>
