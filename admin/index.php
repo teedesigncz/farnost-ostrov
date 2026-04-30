@@ -768,6 +768,8 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
   label { display: block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #666; margin-bottom: 0.4rem; }
   input[type="password"], input[type="text"] { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; background: #fff; color: var(--dark); transition: border-color 0.2s; }
   input[type="password"]:focus, input[type="text"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,146,42,0.12); }
+  input[type="date"] { width: 100%; padding: 0.975rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; background: #fff; color: var(--dark); transition: border-color 0.2s; box-sizing: border-box; }
+  input[type="date"]:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,146,42,0.12); }
   .form-group { margin-bottom: 1.1rem; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
 
