@@ -168,6 +168,7 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         if ($akce === 'pridat') {
             $nazev          = trim($_POST['nazev']          ?? '');
             $poznamka       = trim($_POST['poznamka']       ?? '');
+            $datum_od       = trim($_POST['datum_od']       ?? '');
             $datum_expirace = trim($_POST['datum_expirace'] ?? '');
             $pinnováno      = !empty($_POST['pinnováno']);
             $upload         = $_FILES['soubor'] ?? null;
@@ -207,8 +208,8 @@ if (isset($_SESSION['farnost_admin']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
                     }
                 }
                 $nova    = ['soubor' => $nazevSouboru, 'nazev' => $nazev,
-                            'poznamka' => $poznamka, 'datum_expirace' => $datum_expirace,
-                            'pinnováno' => $pinnováno];
+                            'poznamka' => $poznamka, 'datum_od' => $datum_od,
+                            'datum_expirace' => $datum_expirace, 'pinnováno' => $pinnováno];
                 $ohlasky = nactiJson(OHLASKY_JSON);
                 if ($pinnováno) {
                     array_unshift($ohlasky, $nova);
@@ -984,7 +985,11 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label for="datum_expirace">Platí do (datum expirace)</label>
+            <label for="datum_od">Platí od</label>
+            <input type="date" id="datum_od" name="datum_od">
+          </div>
+          <div class="form-group">
+            <label for="datum_expirace">Platí do</label>
             <input type="date" id="datum_expirace" name="datum_expirace" required>
           </div>
           <div class="form-group" style="display:flex;align-items:center;gap:0.6rem;padding-top:1.6rem;">
@@ -1020,8 +1025,9 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
         <div class="ohlasky-list">
           <?php foreach ($ohlasky as $o):
             $je_pinned = !empty($o['pinnováno']);
+            $od_text   = !empty($o['datum_od'])       ? 'od ' . date('j. n. Y', strtotime($o['datum_od'])) : '';
             $exp_text  = !empty($o['datum_expirace'])
-                ? 'platí do ' . date('j. n. Y', strtotime($o['datum_expirace']))
+                ? 'do ' . date('j. n. Y', strtotime($o['datum_expirace']))
                 : ((!empty($o['datum1']) ? $o['datum1'] : '') . (!empty($o['datum2']) ? ' · ' . $o['datum2'] : ''));
           ?>
             <div class="ohlaska-row <?= $je_pinned ? 'ohlaska-row--pinned' : '' ?>">
@@ -1032,6 +1038,7 @@ if ($prihlaseni && $sekce === 'aktuality' && !empty($_GET['upravit'])) {
                 <?php if (!empty($o['poznamka'])): ?>
                   <div class="ohlaska-row-datum" style="font-style:italic;"><?= h($o['poznamka']) ?></div>
                 <?php endif; ?>
+                <?php if ($od_text): ?><div class="ohlaska-row-datum"><?= h($od_text) ?></div><?php endif; ?>
                 <div class="ohlaska-row-datum"><?= h($exp_text) ?></div>
                 <div class="ohlaska-row-soubor">
                   <a href="../ohlasky/<?= h(rawurlencode($o['soubor'])) ?>" target="_blank" style="color:var(--gold)">📄 <?= h($o['soubor']) ?></a>

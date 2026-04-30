@@ -1268,6 +1268,14 @@
           html += '</div>';
           html += '<div class="ohlaska-meta">';
           if (o.poznamka) html += '<span>' + esc(o.poznamka) + '</span>';
+          if (o.datum_od) {
+            var dOd = new Date(o.datum_od);
+            html += '<span>Od: ' + dOd.getDate() + '. ' + (dOd.getMonth()+1) + '. ' + dOd.getFullYear() + '</span>';
+          }
+          if (o.datum_expirace) {
+            var dDo = new Date(o.datum_expirace);
+            html += '<span>Do: ' + dDo.getDate() + '. ' + (dDo.getMonth()+1) + '. ' + dDo.getFullYear() + '</span>';
+          }
           if (href) html += '<a href="' + href + '" target="_blank">Zobrazít PDF →</a>';
           html += '</div></div>';
           list.innerHTML = html;
